@@ -8,12 +8,18 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float Speed = 10f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float TimeLife = 5f;
+    private static GameObject obj = null;
    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        
        
+    }
+
+    public static GameObject GetC()
+    {
+        return obj;
     }
 
 
@@ -23,7 +29,7 @@ public class Bullet : MonoBehaviour
         Vector3 dir = transform.rotation * Vector3.forward;
 
         rb.AddForce(dir * Speed, ForceMode.Impulse);
-
+       
 
     }
 
