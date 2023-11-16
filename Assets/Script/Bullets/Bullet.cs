@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
     public void TakeForce()
     {
 
-        Vector3 dir = transform.rotation * Vector3.forward;
+        Vector3 dir = transform.rotation * Vector3.back;
 
         rb.AddForce(dir * Speed, ForceMode.Impulse);
        

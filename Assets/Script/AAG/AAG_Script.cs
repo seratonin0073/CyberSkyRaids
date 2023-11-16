@@ -46,8 +46,8 @@ public class AAG_Script : MonoBehaviour
     IEnumerator Shoot()
     {
         IsShoot = false;
-        GameObject bullet = Instantiate(bulletPrefab, guns[0].transform.position, transform.rotation * Quaternion.Euler(0, -90, 0));
-        GameObject bullet1 = Instantiate(bulletPrefab, guns[1].transform.position, transform.rotation * Quaternion.Euler(0, -90, 0));
+        GameObject bullet = Instantiate(bulletPrefab, guns[0].transform.position, transform.rotation * Quaternion.Euler(0, -270, 0));
+        GameObject bullet1 = Instantiate(bulletPrefab, guns[1].transform.position, transform.rotation * Quaternion.Euler(0, -270, 0));
         muzzleFire0.Play();
         muzzleFire1.Play();
         bullet.transform.parent = null;
