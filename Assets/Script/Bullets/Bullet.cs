@@ -46,12 +46,8 @@ public class Bullet : MonoBehaviour
 
 
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.gameObject.CompareTag("Bullet"))
-        {
+	private void OnCollisionEnter(UnityEngine.Collision collision)
+	{
             Destroy(this.gameObject);
-        }
     }
 }

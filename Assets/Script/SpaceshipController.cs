@@ -14,6 +14,8 @@ public class SpaceshipController : MonoBehaviour
 	[SerializeField] private ParticleSystem partSyst;
 	[SerializeField] private Rigidbody rb;
 	[SerializeField] private Collider colliders;
+	[SerializeField] private GameObject plane;
+	[SerializeField] private GameObject targetObject;
 	Rigidbody boomRB;
 
 	private bool canFly;
@@ -22,6 +24,7 @@ public class SpaceshipController : MonoBehaviour
 
 	private void Start()
 	{
+		plane.SetActive(false);
 		boomRB = BoomObj.AddComponent<Rigidbody>();
 		canFly = true;
 		rb.useGravity = false;
@@ -32,6 +35,8 @@ public class SpaceshipController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
+		plane.SetActive(true);
+		targetObject.tag = "Untagged";
 		boomRB.freezeRotation = true;
 		boomRB.constraints = RigidbodyConstraints.FreezePosition;
 		Debug.Log(collision.gameObject);
@@ -90,6 +95,9 @@ public class SpaceshipController : MonoBehaviour
 					-activeRoll * rollPower,
 					Space.Self);
 			}
+		}
+		else{
+			plane.SetActive(true);
 		}
 	}
 }
