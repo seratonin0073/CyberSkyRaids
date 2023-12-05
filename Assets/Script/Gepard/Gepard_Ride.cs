@@ -26,7 +26,7 @@ public class Gepard_Ride : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.transform.CompareTag("DroneCollider"))
+		if (collision.transform.CompareTag("DroneCollider") || collision.transform.CompareTag("Bullet"))
 		{
 			Debug.Log("Boom");
 			canRide = false;
