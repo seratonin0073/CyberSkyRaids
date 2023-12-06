@@ -9,7 +9,10 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float TimeLife = 5f;
     private static GameObject obj = null;
-   
+    Vector3 previousPosition;
+
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -20,6 +23,11 @@ public class Bullet : MonoBehaviour
     public static GameObject GetC()
     {
         return obj;
+    }
+
+    public float GetSpeed()
+    {
+        return rb.velocity.magnitude;
     }
 
 
@@ -37,11 +45,9 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-     //   transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        //   transform.Translate(Vector3.forward * Speed * Time.deltaTime);
 
-
-       
-
+        
     }
 
 

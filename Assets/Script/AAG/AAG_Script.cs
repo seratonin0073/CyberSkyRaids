@@ -8,6 +8,7 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject Muzzle;
     [SerializeField] private Transform target;
+    [SerializeField] private GameObject targetDrone;
     [SerializeField] private float range;
     [SerializeField] private float RotateSpeed = 3f;
     [SerializeField] private float CoolDown = 5f;
@@ -16,6 +17,13 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] private GameObject[] guns;
     [SerializeField] private ParticleSystem muzzleFire0;
     [SerializeField] private ParticleSystem muzzleFire1;
+    [SerializeField] public Rigidbody drone0;
+    [SerializeField] public float bullet_speed;
+    [SerializeField] public float drone_speed;
+    [SerializeField] public float ATD_S;
+    [SerializeField] public float S1;
+    [SerializeField] public float T;
+
 
     private void OnDrawGizmos()
     {
@@ -28,8 +36,11 @@ public class AAG_Script : MonoBehaviour
 
     void Start()
     {
+        // bullet_speed = bulletPrefab.GetComponent<Bullet>().GetSpeed();
+        drone_speed = 20;
+        bullet_speed= 100;
         InvokeRepeating("FindTarget", 0f, 0.3f);
-     
+        
 
     }
 
@@ -63,6 +74,7 @@ public class AAG_Script : MonoBehaviour
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Drone");
         GameObject CurrentTarget = null;
+        GameObject TargetDrone = null;
         float distance = Mathf.Infinity;
 
         foreach (GameObject target in targets)
@@ -74,6 +86,11 @@ public class AAG_Script : MonoBehaviour
 
                 distance = distanceToEnemy;
                 CurrentTarget = target;
+                ATD_S = distance;
+                T = ATD_S / bullet_speed;  
+                targetDrone = CurrentTarget.GetComponent<SpaceshipController>().TargetPointGet();
+                CurrentTarget.GetComponent<SpaceshipController>().SetTargetPoint(T);
+
                 IsShoot = true;
                
 
@@ -84,13 +101,14 @@ public class AAG_Script : MonoBehaviour
         if (distance <= range && CurrentTarget != null)
         {
 
-            this.target = CurrentTarget.transform;
+            this.target = targetDrone.transform;
 
         }
 
         else
         {
             this.target = null;
+            this.targetDrone = null;
             IsShoot = false;
         }
 
