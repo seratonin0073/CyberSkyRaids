@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - Drone
   - DroneCollider
+  - DroneTarget
   layers:
   - Default
   - TransparentFX

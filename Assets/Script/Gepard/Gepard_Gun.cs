@@ -36,6 +36,8 @@ public class Gepard_Gun : MonoBehaviour
 	[SerializeField] private float scaleRadar = 5f;
 	[SerializeField] private GameObject guntowerb;
 	[SerializeField] public GameObject aaCar;
+
+	
 	float y0;
 
 

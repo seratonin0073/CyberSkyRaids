@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpaceshipController : MonoBehaviour
@@ -16,9 +17,17 @@ public class SpaceshipController : MonoBehaviour
 	[SerializeField] private Collider colliders;
 	[SerializeField] private GameObject plane;
 	[SerializeField] private GameObject targetObject;
-	Rigidbody boomRB;
+	[SerializeField] private float S_DTT;
+	[SerializeField] private float T;
+    [SerializeField] private float V = 20;
+    [SerializeField] private GameObject EP;
+    Rigidbody boomRB;
 
-	private bool canFly;
+
+
+
+
+    private bool canFly;
 
 	private float activeRoll, activePitch, activeYaw;
 
@@ -31,7 +40,26 @@ public class SpaceshipController : MonoBehaviour
 		boomRB.useGravity = false;
 		boomRB.freezeRotation = false;
 		boomRB.constraints = RigidbodyConstraints.None;
-	}
+        
+    }
+
+	public void SetTargetPoint(float time1)
+	{
+		T = time1;
+		S_DTT = T * V - 30;
+		
+
+        Vector3 targetPosition = transform.position - targetObject.transform.up * S_DTT * Random.Range(0.8f, 1.2f);
+
+        
+        targetObject.transform.position =  targetPosition;
+
+
+    }
+
+
+
+	public GameObject TargetPointGet() { return targetObject; }	
 
 	private void OnCollisionEnter(Collision collision)
 	{
@@ -74,11 +102,12 @@ public class SpaceshipController : MonoBehaviour
 			if (throttle)
 			{
 				transform.position += transform.forward * enginePower * Time.deltaTime;
+				
 
-				activePitch = Input.GetAxisRaw("Vertical") * pitchPower * Time.deltaTime;
+                activePitch = Input.GetAxisRaw("Vertical") * pitchPower * Time.deltaTime;
 				activeRoll = Input.GetAxisRaw("Horizontal") * rollPower * Time.deltaTime;
 				activeYaw = Input.GetAxisRaw("Yaw") * yawPower * Time.deltaTime;
-
+				
 				transform.Rotate(activePitch * pitchPower,
 					activeYaw * yawPower,
 					-activeRoll * rollPower,
@@ -99,5 +128,9 @@ public class SpaceshipController : MonoBehaviour
 		else{
 			plane.SetActive(true);
 		}
-	}
+
+
+    
+
+    }
 }
