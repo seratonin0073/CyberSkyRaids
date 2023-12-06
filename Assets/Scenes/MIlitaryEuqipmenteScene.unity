@@ -1740,10 +1740,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3202532425599028096, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: m_Size.x
+      value: 11.6828985
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202532425599028096, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: m_Size.y
+      value: 7.7378616
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202532425599028096, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: m_Center.x
+      value: 0.19416036
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202532425599028096, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: m_Center.y
+      value: 3.0624774
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202532425599028096, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: m_Center.z
+      value: -0.012494804
+      objectReference: {fileID: 0}
     - target: {fileID: 3202532425599028097, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
       propertyPath: plane
       value: 
       objectReference: {fileID: 1725359587}
+    - target: {fileID: 3202532425599028098, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: m_Mass
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 3202532425599028099, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
       propertyPath: m_Name
       value: sci-Fi-Car
@@ -1757,6 +1781,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 592264305737703335, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592264305737703335, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 592264305737703335, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.07
+      objectReference: {fileID: 0}
     - target: {fileID: 3869447081524724404, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
       propertyPath: m_Name
       value: Sci-fi-Plane (1)
@@ -1809,6 +1845,14 @@ PrefabInstance:
       propertyPath: plane
       value: 
       objectReference: {fileID: 433609927}
+    - target: {fileID: 6307829586053847879, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
+      propertyPath: enginePower
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831988264444538940, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
+      propertyPath: bulletForce
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
 --- !u!1001 &2078443494493353890
