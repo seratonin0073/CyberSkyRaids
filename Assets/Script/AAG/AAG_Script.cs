@@ -91,9 +91,10 @@ public class AAG_Script : MonoBehaviour
                 CurrentTarget = target;
                 ATD_S = distance;
                 T = ATD_S / bullet_speed;
+                
                 targetDrone = CurrentTarget.GetComponent<SpaceshipController>().TargetPointGet();
                 CurrentTarget.GetComponent<SpaceshipController>().SetTargetPoint(T);
-
+               
                 IsShoot = true;
 
 
