@@ -43,6 +43,7 @@ public class Gepard_Gun : MonoBehaviour
 
 	IEnumerator Shoot()
 	{
+
 		IsShoot = false;
 		GameObject bullet = Instantiate(bulletPrefab, guns[0].transform.position, Gun.transform.rotation);
 		GameObject bullet1 = Instantiate(bulletPrefab, guns[1].transform.position, Gun.transform.rotation);
