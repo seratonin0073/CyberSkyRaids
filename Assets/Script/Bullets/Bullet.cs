@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float TimeLife = 5f;
     private static GameObject obj = null;
+
    
     void Start()
     {
@@ -25,6 +26,8 @@ public class Bullet : MonoBehaviour
 
     public void TakeForce()
     {
+
+
 
         Vector3 dir = transform.rotation * Vector3.back;
 
