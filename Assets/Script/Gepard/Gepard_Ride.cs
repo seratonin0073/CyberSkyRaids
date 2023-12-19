@@ -15,9 +15,12 @@ public class Gepard_Ride : MonoBehaviour
 	[SerializeField] private GameObject plane;
 	private Vector3 directionForward = new Vector3(-1, 0, 0);
 	private Vector3 directionBack = Vector3.forward;
+	[SerializeField] private ParticleSystem explosion;
+    [SerializeField] private ParticleSystem[] fire;
+	[SerializeField] private float sciFiCarHP;
 
 
-	void Start()
+    void Start()
 	{
 		canRide = true;
 		rb = GetComponent<Rigidbody>();
@@ -28,6 +31,11 @@ public class Gepard_Ride : MonoBehaviour
 	{
 		if (collision.transform.CompareTag("DroneCollider") || collision.transform.CompareTag("Bullet"))
 		{
+			explosion.Play();
+			foreach(var f in fire)
+			{
+				f.Play();
+			}
 			Debug.Log("Boom");
 			canRide = false;
 		}
