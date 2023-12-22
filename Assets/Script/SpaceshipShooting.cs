@@ -12,6 +12,7 @@ public class SpaceshipShooting : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private bool isReloading = false;
     [SerializeField] private GameObject Parent;
+    [SerializeField] private AudioSource shoot1;
     Vector3 screenSpaceCenter = new Vector3(0.5f, 0.5f, 0);
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class SpaceshipShooting : MonoBehaviour
                 Rigidbody rb = bulletClone.AddComponent<Rigidbody>();
                 rb.useGravity = false;
                 rb.velocity = ray.direction * bulletForce;
+                shoot1.Play();
                 //rb.AddForce(screenSpaceCenter * bulletForce,ForceMode.Impulse);
             }
             

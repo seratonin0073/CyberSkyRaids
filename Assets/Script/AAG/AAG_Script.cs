@@ -11,7 +11,7 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float range;
     [SerializeField] private float RotateSpeed = 3f;
-    [SerializeField] private float CoolDown = 5f;
+    [SerializeField] private float CoolDown = 3f;
     [SerializeField] private bool IsShoot = false;
     [SerializeField] private bool IsShootCD = false;
     [SerializeField] private GameObject[] guns;
@@ -23,7 +23,9 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] public float ATD_S;
     [SerializeField] public float S1;
     [SerializeField] public float T;
+    [SerializeField] private AudioSource fire;
     GameObject TargetDrone;
+ 
 
 
 
@@ -64,6 +66,7 @@ public class AAG_Script : MonoBehaviour
         GameObject bullet1 = Instantiate(bulletPrefab, guns[1].transform.position, transform.rotation * Quaternion.Euler(0, -270, 0));
         muzzleFire0.Play();
         muzzleFire1.Play();
+        fire.Play();
         bullet.transform.parent = null;
         bullet1.transform.parent = null;
         bullet.GetComponent<Bullet>().TakeForce();

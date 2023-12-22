@@ -16,11 +16,12 @@ public class SpaceshipController : MonoBehaviour
 	[SerializeField] private Collider colliders;
 	[SerializeField] private GameObject plane;
 	[SerializeField] private GameObject targetObject;
-    [SerializeField] private float S_DTT;
-    [SerializeField] private float T;
-    [SerializeField] private float V = 20;
-    [SerializeField] private GameObject EP;
-
+	[SerializeField] private float S_DTT;
+	[SerializeField] private float T;
+	[SerializeField] private float V = 20;
+	[SerializeField] private GameObject EP;
+	[SerializeField] private AudioSource audio1;
+    [SerializeField] private AudioSource audio2;
 
     Rigidbody boomRB;
 
@@ -30,6 +31,7 @@ public class SpaceshipController : MonoBehaviour
 
 	private void Start()
 	{
+		audio1.Play();
         plane.SetActive(false);
 		boomRB = BoomObj.AddComponent<Rigidbody>();
 		canFly = true;
@@ -62,19 +64,22 @@ public class SpaceshipController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
 	{
 		plane.SetActive(true);
-		targetObject.tag = "Untagged";
+		transform.gameObject.tag = "Untagged";
 		boomRB.freezeRotation = true;
 		boomRB.constraints = RigidbodyConstraints.FreezePosition;
 		Debug.Log(collision.gameObject);
 		canFly = false;
 		pressingThrottle = false;
 		rb.useGravity = true;
-		if (canBoom)
+        audio1.Stop();
+        if (canBoom)
 		{
 			rb.AddForce(collision.transform.position, ForceMode.Impulse);
 			partSyst.Play();
-			canBoom = false;
+			audio2.Play();
+            canBoom = false;
 		}
+
 	}
 
 	private void Update()
@@ -124,6 +129,7 @@ public class SpaceshipController : MonoBehaviour
 		}
 		else{
 			plane.SetActive(true);
+
 		}
 	}
 }

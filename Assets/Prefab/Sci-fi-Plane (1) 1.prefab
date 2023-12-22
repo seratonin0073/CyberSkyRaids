@@ -218,7 +218,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592264305737703328}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &592264306135815088
 GameObject:
   m_ObjectHideFlags: 0
@@ -39606,6 +39606,10 @@ MonoBehaviour:
   colliders: {fileID: 5820027081467057262}
   plane: {fileID: 0}
   targetObject: {fileID: 592264306394430009}
+  S_DTT: 0
+  T: 0
+  V: 20
+  EP: {fileID: 91088231988270931}
 --- !u!54 &6307829586053847876
 Rigidbody:
   m_ObjectHideFlags: 0
