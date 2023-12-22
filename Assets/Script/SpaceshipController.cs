@@ -64,7 +64,6 @@ public class SpaceshipController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
 	{
 		plane.SetActive(true);
-		transform.gameObject.tag = "Untagged";
 		boomRB.freezeRotation = true;
 		boomRB.constraints = RigidbodyConstraints.FreezePosition;
 		Debug.Log(collision.gameObject);
@@ -72,6 +71,7 @@ public class SpaceshipController : MonoBehaviour
 		pressingThrottle = false;
 		rb.useGravity = true;
         audio1.Stop();
+        StartCoroutine(timerTag(2));
         if (canBoom)
 		{
 			rb.AddForce(collision.transform.position, ForceMode.Impulse);
@@ -81,6 +81,13 @@ public class SpaceshipController : MonoBehaviour
 		}
 
 	}
+
+
+	IEnumerator timerTag(float duration)
+	{
+		yield return new WaitForSeconds(duration);
+        transform.gameObject.tag = "Untagged";
+    }
 
 	private void Update()
 	{
