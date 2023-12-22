@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        StartCoroutine(timerTag());
        
     }
 
@@ -53,4 +53,11 @@ public class Bullet : MonoBehaviour
 	{
             Destroy(this.gameObject);
     }
+
+    IEnumerator timerTag()
+    {
+        yield return new WaitForSeconds(TimeLife);
+        Destroy(this.gameObject);
+    }
+
 }
