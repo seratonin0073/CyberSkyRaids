@@ -36,7 +36,9 @@ public class Gepard_Gun : MonoBehaviour
 	[SerializeField] private float scaleRadar = 5f;
 	[SerializeField] private GameObject guntowerb;
 	[SerializeField] public GameObject aaCar;
-	float y0;
+	[SerializeField] private AudioSource shoot0;
+    [SerializeField] private AudioSource reload;
+    float y0;
 
 
 
@@ -49,7 +51,8 @@ public class Gepard_Gun : MonoBehaviour
 		GameObject bullet1 = Instantiate(bulletPrefab, guns[1].transform.position, Gun.transform.rotation);
 		muzzleFire0.Play();
 		muzzleFire1.Play();
-		bullet.transform.parent = null;
+        shoot0.Play();
+        bullet.transform.parent = null;
 		bullet1.transform.parent = null;
 		bullet.GetComponent<Bullet>().TakeForce();
 		bullet1.GetComponent<Bullet>().TakeForce();
@@ -91,8 +94,7 @@ public class Gepard_Gun : MonoBehaviour
 
 		}
 
-		MeMark.rectTransform.rotation = Quaternion.AngleAxis(-guntowerb.transform.rotation.eulerAngles.y, Vector3.forward);
-
+		
 	}
 
 
@@ -164,7 +166,9 @@ public class Gepard_Gun : MonoBehaviour
 			{
 				IsReload = true;
 
-				currentTimeReload = Time.time + TimeReload;
+                reload.Play();
+
+                currentTimeReload = Time.time + TimeReload;
 
 			}
 
@@ -172,7 +176,9 @@ public class Gepard_Gun : MonoBehaviour
 			{
 				IsReload = true;
 
-				currentTimeReload = Time.time + TimeReload;
+                reload.Play();
+
+                currentTimeReload = Time.time + TimeReload;
 			}
 
 			ammodis.text = "Ammo: " + Ammo + " / " + MaxAmmo;
@@ -189,9 +195,11 @@ public class Gepard_Gun : MonoBehaviour
 
 				ammodis.text = "Reloading... ";
 
+				
 
 				if (currentTimeReload <= Time.time)
 				{
+					reload.Stop();
 					Ammo = MaxAmmo;
 					IsReload = false;
 				}
