@@ -24,8 +24,9 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] public float S1;
     [SerializeField] public float T;
     [SerializeField] private AudioSource fire;
+    [SerializeField] private AudioSource boom1;
     GameObject TargetDrone;
- 
+    // boom1.Play();
 
 
 
