@@ -18,21 +18,29 @@ public class Gepard_Ride : MonoBehaviour
 	[SerializeField] private ParticleSystem explosion;
     [SerializeField] private ParticleSystem[] fire;
 	[SerializeField] private float sciFiCarHP;
-
+	[SerializeField] private AudioSource engine1;
+    [SerializeField] private AudioSource expl;
 
     void Start()
 	{
-		canRide = true;
+        engine1.Play();
+        canRide = true;
 		rb = GetComponent<Rigidbody>();
 		plane.SetActive(false);
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.transform.CompareTag("DroneCollider") || collision.transform.CompareTag("Bullet"))
+	
+
+
+        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet"))
 		{
 			explosion.Play();
-			foreach(var f in fire)
+            engine1.Stop();
+			expl.Play();
+
+            foreach (var f in fire)
 			{
 				f.Play();
 			}
