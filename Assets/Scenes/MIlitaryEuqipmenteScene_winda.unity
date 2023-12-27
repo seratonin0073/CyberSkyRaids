@@ -2658,7 +2658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3869447081524724404, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3869447081524724405, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
       propertyPath: m_RootOrder
@@ -2666,11 +2666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3869447081524724405, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -175.71
+      value: -204.4
       objectReference: {fileID: 0}
     - target: {fileID: 3869447081524724405, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -126.1
+      value: -40.6
       objectReference: {fileID: 0}
     - target: {fileID: 3869447081524724405, guid: 545a2eef643fe264bafacbb7fbff398d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2997,7 +2997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4472798616157443206, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4472798616637224075, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
       propertyPath: MeMark
