@@ -36,16 +36,19 @@ public class Gepard_Ride : MonoBehaviour
 
         if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet"))
 		{
-			explosion.Play();
-            engine1.Stop();
-			expl.Play();
-
-            foreach (var f in fire)
+			if(canRide)
 			{
-				f.Play();
+				engine1.Stop();
+				expl.Play();
+				explosion.Play();
+
+				foreach (var f in fire)
+				{
+					f.Play();
+				}
+				Debug.Log("Boom");
+				canRide = false;
 			}
-			Debug.Log("Boom");
-			canRide = false;
 		}
 	}
 
