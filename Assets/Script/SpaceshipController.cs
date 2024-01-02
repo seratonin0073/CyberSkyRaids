@@ -12,7 +12,8 @@ public class SpaceshipController : MonoBehaviour
 	public float pitchPower, rollPower, yawPower, enginePower;
 	[SerializeField] private GameObject BoomObj;
 	[SerializeField] private ParticleSystem partSyst;
-	[SerializeField] private Rigidbody rb;
+    [SerializeField] private ParticleSystem[] fire;
+    [SerializeField] private Rigidbody rb;
 	[SerializeField] private Collider colliders;
 	[SerializeField] private GameObject plane;
 	[SerializeField] private GameObject targetObject;
@@ -22,6 +23,7 @@ public class SpaceshipController : MonoBehaviour
 	[SerializeField] private GameObject EP;
 	[SerializeField] private AudioSource audio1;
     [SerializeField] private AudioSource audio2;
+	[SerializeField] private Light[] lights;
 
     Rigidbody boomRB;
 
@@ -74,7 +76,15 @@ public class SpaceshipController : MonoBehaviour
         StartCoroutine(timerTag(2));
         if (canBoom)
 		{
-			rb.AddForce(collision.transform.position, ForceMode.Impulse);
+            foreach (var f in fire)
+            {
+                f.Play();
+            }
+			foreach(var l in lights)
+			{
+				Destroy(l.gameObject);
+			}
+            rb.AddForce(collision.transform.position, ForceMode.Impulse);
 			partSyst.Play();
 			audio2.Play();
             canBoom = false;

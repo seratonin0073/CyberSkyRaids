@@ -17,6 +17,8 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] private GameObject[] guns;
     [SerializeField] private ParticleSystem muzzleFire0;
     [SerializeField] private ParticleSystem muzzleFire1;
+    [SerializeField] private ParticleSystem Expl;
+    [SerializeField] private ParticleSystem[] fireEff;
     [SerializeField] public Rigidbody drone0;
     [SerializeField] public float bullet_speed;
     [SerializeField] public float drone_speed;
@@ -25,8 +27,8 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] public float T;
     [SerializeField] private AudioSource fire;
     [SerializeField] private AudioSource boom1;
+    private bool isDestroyed = false;
     GameObject TargetDrone;
-    // boom1.Play();
 
 
 
@@ -55,8 +57,29 @@ public class AAG_Script : MonoBehaviour
 
     void Update()
     {
-       
-        Look();
+        if (!isDestroyed)
+        {
+            Look();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+
+
+        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet"))
+        {
+                boom1.Play();
+                fire.Play();
+                Expl.Play();
+
+                foreach (var f in fireEff)
+                {
+                    f.Play();
+                }
+                isDestroyed = true;
+        }
     }
 
 
