@@ -23,6 +23,7 @@ public class SpaceshipController : MonoBehaviour
 	[SerializeField] private GameObject EP;
 	[SerializeField] private AudioSource audio1;
     [SerializeField] private AudioSource audio2;
+	[SerializeField] private AudioSource fire_sound;
 	[SerializeField] private Light[] lights;
 
     Rigidbody boomRB;
@@ -87,6 +88,7 @@ public class SpaceshipController : MonoBehaviour
             rb.AddForce(collision.transform.position, ForceMode.Impulse);
 			partSyst.Play();
 			audio2.Play();
+            fire_sound.Play();
             canBoom = false;
 		}
 

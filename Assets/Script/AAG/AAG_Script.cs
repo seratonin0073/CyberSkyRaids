@@ -27,6 +27,7 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] public float T;
     [SerializeField] private AudioSource fire;
     [SerializeField] private AudioSource boom1;
+    [SerializeField] private AudioSource fire1;
     private bool isDestroyed = false;
     GameObject TargetDrone;
 
@@ -68,12 +69,12 @@ public class AAG_Script : MonoBehaviour
 
 
 
-        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet"))
+        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet") && !isDestroyed)
         {
                 boom1.Play();
                 fire.Play();
                 Expl.Play();
-
+                fire1.Play();
                 foreach (var f in fireEff)
                 {
                     f.Play();

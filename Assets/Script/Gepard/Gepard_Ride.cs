@@ -20,6 +20,8 @@ public class Gepard_Ride : MonoBehaviour
 	[SerializeField] private float sciFiCarHP;
 	[SerializeField] private AudioSource engine1;
     [SerializeField] private AudioSource expl;
+    [SerializeField] private AudioSource fire_sound;
+
 
     void Start()
 	{
@@ -41,8 +43,8 @@ public class Gepard_Ride : MonoBehaviour
 				engine1.Stop();
 				expl.Play();
 				explosion.Play();
-
-				foreach (var f in fire)
+                fire_sound.Play();
+                foreach (var f in fire)
 				{
 					f.Play();
 				}
