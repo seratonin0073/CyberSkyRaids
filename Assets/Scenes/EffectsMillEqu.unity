@@ -123,16 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!20 &283117135 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6606403961067181035, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
-  m_PrefabInstance: {fileID: 6606403960809231780}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &349832983 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 8502876078379052391, guid: 9fae6fbc236be764c91de714af9bba89, type: 3}
-  m_PrefabInstance: {fileID: 8502876078383111254}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &490677719
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,13 +283,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 53.456, y: -62.843, z: -158.903}
---- !u!108 &532497067 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 8502876078035743958, guid: 9fae6fbc236be764c91de714af9bba89, type: 3}
-  m_PrefabInstance: {fileID: 8502876078383111254}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &592423503
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +813,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 283117135}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1322,6 +1307,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4379774915973852554, guid: ad3cb29f1ecbc1442a22c2e5cffc0710, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad3cb29f1ecbc1442a22c2e5cffc0710, type: 3}
 --- !u!1001 &3960252594588024340
@@ -1334,7 +1323,7 @@ PrefabInstance:
     - target: {fileID: 6790646616950944735, guid: 04330168b2e91f349a07176babd52e3e, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 283117135}
+      objectReference: {fileID: 0}
     - target: {fileID: 8423536056445345708, guid: 04330168b2e91f349a07176babd52e3e, type: 3}
       propertyPath: m_Name
       value: Bullet
@@ -1392,6 +1381,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1679942307286029544, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: ammodis
+      value: 
+      objectReference: {fileID: 1432627497}
+    - target: {fileID: 1679942307286029544, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 2106168189}
+    - target: {fileID: 3793520120299438425, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606789754771381217, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
+      propertyPath: plane
+      value: 
+      objectReference: {fileID: 1725359587}
     - target: {fileID: 6606403959442502631, guid: e367c92025887f441a36bd63f5b1608d, type: 3}
       propertyPath: MeMark
       value: 
@@ -1528,10 +1533,10 @@ PrefabInstance:
     - target: {fileID: 8502876078006743739, guid: 9fae6fbc236be764c91de714af9bba89, type: 3}
       propertyPath: lights.Array.data[0]
       value: 
-      objectReference: {fileID: 532497067}
+      objectReference: {fileID: 0}
     - target: {fileID: 8502876078006743739, guid: 9fae6fbc236be764c91de714af9bba89, type: 3}
       propertyPath: lights.Array.data[1]
       value: 
-      objectReference: {fileID: 349832983}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fae6fbc236be764c91de714af9bba89, type: 3}
