@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -39,16 +40,17 @@ public class Gepard_Gun : MonoBehaviour
 	[SerializeField] private AudioSource shoot0;
     [SerializeField] private AudioSource reload;
     float y0;
+    [SerializeField] private PhotonView photonView;
+	[SerializeField] private GameObject meny;
 
 
 
-
-	IEnumerator Shoot()
+    IEnumerator Shoot()
 	{
 
 		IsShoot = false;
-		GameObject bullet = Instantiate(bulletPrefab, guns[0].transform.position, Gun.transform.rotation);
-		GameObject bullet1 = Instantiate(bulletPrefab, guns[1].transform.position, Gun.transform.rotation);
+		GameObject bullet = PhotonNetwork.Instantiate("Bullet", guns[0].transform.position, Gun.transform.rotation);
+		GameObject bullet1 = PhotonNetwork.Instantiate("Bullet", guns[1].transform.position, Gun.transform.rotation);
 		muzzleFire0.Play();
 		muzzleFire1.Play();
         shoot0.Play();
@@ -100,20 +102,29 @@ public class Gepard_Gun : MonoBehaviour
 
 	void Start()
 	{
-		/*  GunTower = GameObject.Find("Gepard_Tower");
+
+        if (!photonView.IsMine)
+        {
+			return;
+        }
+        /*  GunTower = GameObject.Find("Gepard_Tower");
 		  Gun = GameObject.Find("GunPointCenter");
 
 		  Guns = GameObject.Find("Turrets_low");
 		 */
-		InvokeRepeating("FindTarget", 0, 0.3f);
+        InvokeRepeating("FindTarget", 0, 0.3f);
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 
 	void Update()
-	{	
-		
-		if (aaCar.GetComponent<Gepard_Ride>().canRide)		
+    {
+        if (!photonView.IsMine || meny.activeSelf)
+        {
+            return;
+        }
+
+        if (aaCar.GetComponent<Gepard_Ride>().canRide)		
 		{
 
 			// Поворот башни
