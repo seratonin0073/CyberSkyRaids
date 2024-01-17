@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
 
 public class SpaceshipShooting : MonoBehaviour
 {
@@ -13,15 +14,25 @@ public class SpaceshipShooting : MonoBehaviour
     [SerializeField] private bool isReloading = false;
     [SerializeField] private GameObject Parent;
     [SerializeField] private AudioSource shoot1;
+
+    [SerializeField] private PhotonView photonView; // Вова, тронешь строки с фотоном - убью    :D
+
+    
     Vector3 screenSpaceCenter = new Vector3(0.5f, 0.5f, 0);
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+
+
+
 
     // Update is called once per frame
     void Update()
     {
+
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
+
         Vector3 laserEnd = cam.ViewportToWorldPoint(screenSpaceCenter);
         if (Input.GetMouseButtonDown(0))
         {
@@ -31,11 +42,12 @@ public class SpaceshipShooting : MonoBehaviour
                 float y = Screen.height / 2;
 
                 var ray = cam.ScreenPointToRay(new Vector3(x, y + YUp, 0));
-                GameObject bulletClone = GameObject.Instantiate(bullet,bulletSpawnPoint.transform);
+                GameObject bulletClone = PhotonNetwork.Instantiate("SpaceShipBullet", bulletSpawnPoint.transform.position, Quaternion.identity);
                 bulletClone.transform.parent = null;
                 Rigidbody rb = bulletClone.AddComponent<Rigidbody>();
                 rb.useGravity = false;
                 rb.velocity = ray.direction * bulletForce;
+                rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
                 shoot1.Play();
                 //rb.AddForce(screenSpaceCenter * bulletForce,ForceMode.Impulse);
             }

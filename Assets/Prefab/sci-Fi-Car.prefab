@@ -20774,6 +20774,7 @@ GameObject:
   - component: {fileID: 1679942307268140697}
   - component: {fileID: 1679942307268140696}
   - component: {fileID: 1679942308118327145}
+  - component: {fileID: 4639701815347592700}
   m_Layer: 0
   m_Name: sci-Fi-Car
   m_TagString: Untagged
@@ -21187,6 +21188,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4639701815347592700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4606789754771381219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27747f47e78127c4bb57f74a5168b915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1679942307866375398}
 --- !u!1 &4974435642794559361
 GameObject:
   m_ObjectHideFlags: 0
