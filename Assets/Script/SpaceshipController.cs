@@ -9,11 +9,18 @@ public class SpaceshipController : MonoBehaviour
 
 	private bool canBoom = true;
 
-	public float pitchPower, rollPower, yawPower, enginePower;
+	[SerializeField]
+	private float
+		flySpeed = 50f,
+		tangazhSpeed = 0.1f;
+
+	private float horizontalMovement;
+	private float Amount = 120;
+
 	[SerializeField] private GameObject BoomObj;
 	[SerializeField] private ParticleSystem partSyst;
-    [SerializeField] private ParticleSystem[] fire;
-    [SerializeField] private Rigidbody rb;
+	[SerializeField] private ParticleSystem[] fire;
+	[SerializeField] private Rigidbody rb;
 	[SerializeField] private Collider colliders;
 	[SerializeField] private GameObject plane;
 	[SerializeField] private GameObject targetObject;
@@ -22,11 +29,11 @@ public class SpaceshipController : MonoBehaviour
 	[SerializeField] private float V = 20;
 	[SerializeField] private GameObject EP;
 	[SerializeField] private AudioSource audio1;
-    [SerializeField] private AudioSource audio2;
+	[SerializeField] private AudioSource audio2;
 	[SerializeField] private AudioSource fire_sound;
 	[SerializeField] private Light[] lights;
 
-    Rigidbody boomRB;
+	Rigidbody boomRB;
 
 	private bool canFly;
 
@@ -35,7 +42,7 @@ public class SpaceshipController : MonoBehaviour
 	private void Start()
 	{
 		audio1.Play();
-        plane.SetActive(false);
+		plane.SetActive(false);
 		boomRB = BoomObj.AddComponent<Rigidbody>();
 		canFly = true;
 		rb.useGravity = false;
@@ -45,26 +52,26 @@ public class SpaceshipController : MonoBehaviour
 	}
 
 
-    public void SetTargetPoint(float time1)
-    {
-        T = time1;
-        S_DTT = T * V - 30;
+	public void SetTargetPoint(float time1)
+	{
+		T = time1;
+		S_DTT = T * V - 30;
 
 
-        Vector3 targetPosition = transform.position - targetObject.transform.up * S_DTT * Random.Range(0.8f, 1.2f);
+		Vector3 targetPosition = transform.position - targetObject.transform.up * S_DTT * Random.Range(0.8f, 1.2f);
 
 
-        targetObject.transform.position = targetPosition;
+		targetObject.transform.position = targetPosition;
 
 
-    }
+	}
 
 
 
-    public GameObject TargetPointGet() { return targetObject; }
+	public GameObject TargetPointGet() { return targetObject; }
 
 
-    private void OnCollisionEnter(Collision collision)
+	private void OnCollisionEnter(Collision collision)
 	{
 		plane.SetActive(true);
 		boomRB.freezeRotation = true;
@@ -73,23 +80,23 @@ public class SpaceshipController : MonoBehaviour
 		canFly = false;
 		pressingThrottle = false;
 		rb.useGravity = true;
-        audio1.Stop();
-        StartCoroutine(timerTag(2));
-        if (canBoom)
+		audio1.Stop();
+		StartCoroutine(timerTag(2));
+		if (canBoom)
 		{
-            foreach (var f in fire)
-            {
-                f.Play();
-            }
-			foreach(var l in lights)
+			foreach (var f in fire)
+			{
+				f.Play();
+			}
+			foreach (var l in lights)
 			{
 				Destroy(l.gameObject);
 			}
-            rb.AddForce(collision.transform.position, ForceMode.Impulse);
+			rb.AddForce(collision.transform.position, ForceMode.Impulse);
 			partSyst.Play();
 			audio2.Play();
-            fire_sound.Play();
-            canBoom = false;
+			fire_sound.Play();
+			canBoom = false;
 		}
 
 	}
@@ -98,54 +105,26 @@ public class SpaceshipController : MonoBehaviour
 	IEnumerator timerTag(float duration)
 	{
 		yield return new WaitForSeconds(duration);
-        transform.gameObject.tag = "Untagged";
-    }
+		transform.gameObject.tag = "Untagged";
+	}
 
 	private void Update()
 	{
 		if (canFly)
 		{
+			transform.Translate(Vector3.forward* flySpeed * Time.fixedDeltaTime);
 
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				if (pressingThrottle == false)
-				{
+			float horizontal = Input.GetAxis("Horizontal");
+			float vertical = Input.GetAxis("Vertical");
 
-					pressingThrottle = true;
+			horizontalMovement += horizontal* Amount * Time.fixedDeltaTime;
+				float verticalMovement = Mathf.Lerp(0, 30, Mathf.Abs(vertical)) * Mathf.Sign(vertical);
+			float roll = Mathf.Lerp(0, 40, Mathf.Abs(horizontal)) * -Mathf.Sign(horizontal);
+			Debug.Log(Mathf.Sign(10));
 
-				}
-				else if (pressingThrottle == true)
-				{
-
-					pressingThrottle = false;
-
-				}
-			}
-			if (throttle)
-			{
-				transform.position += transform.forward * enginePower * Time.deltaTime;
-
-				activePitch = Input.GetAxisRaw("Vertical") * pitchPower * Time.deltaTime;
-				activeRoll = Input.GetAxisRaw("Horizontal") * rollPower * Time.deltaTime;
-				activeYaw = Input.GetAxisRaw("Yaw") * yawPower * Time.deltaTime;
-
-				transform.Rotate(activePitch * pitchPower,
-					activeYaw * yawPower,
-					-activeRoll * rollPower,
-					Space.Self);
-			}
-			else
-			{
-				activePitch = Input.GetAxisRaw("Vertical") * (pitchPower / 2) * Time.deltaTime;
-				activeRoll = Input.GetAxisRaw("Horizontal") * (rollPower / 2) * Time.deltaTime;
-				activeYaw = Input.GetAxisRaw("Yaw") * (yawPower / 2) * Time.deltaTime;
-
-				transform.Rotate(activePitch * pitchPower,
-					activeYaw * yawPower,
-					-activeRoll * rollPower,
-					Space.Self);
-			}
+				transform.localRotation = Quaternion.Euler(Vector3.up* horizontalMovement + Vector3.right* verticalMovement + Vector3.forward* roll);
 		}
+
 		else{
 			plane.SetActive(true);
 

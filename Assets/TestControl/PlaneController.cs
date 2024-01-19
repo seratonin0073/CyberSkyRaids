@@ -23,10 +23,7 @@ public class PlaneController : MonoBehaviour
         float roll = Mathf.Lerp(0, 40, Mathf.Abs(horizontal)) * -Mathf.Sign(horizontal);
         Debug.Log(Mathf.Sign(10));
 
-        transform.localRotation = Quaternion.Euler(Vector3.up * horizontalMovement + Vector3.right * verticalMovement + Vector3.forward * roll); ;
-
-
-
+        transform.localRotation = Quaternion.Euler(Vector3.up * horizontalMovement + Vector3.right * verticalMovement + Vector3.forward * roll);
     }
 
 }
