@@ -865,7 +865,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2732059452527661493, guid: f34cfe0eb01f6574dbb74872ecad60f7, type: 3}
       propertyPath: m_Name
-      value: Sci-fi-Plane (1) 1
+      value: Sci-fi-Plane
       objectReference: {fileID: 0}
     - target: {fileID: 2732059452527661494, guid: f34cfe0eb01f6574dbb74872ecad60f7, type: 3}
       propertyPath: m_RootOrder
