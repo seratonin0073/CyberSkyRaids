@@ -142,7 +142,7 @@ public class ConnectionToServer : MonoBehaviourPunCallbacks
 
     public void StartGameLevel(int levelIndex)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 0)
         {
 
             PhotonNetwork.LoadLevel(levelIndex);
