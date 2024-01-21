@@ -11,8 +11,14 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
 	private bool canBoom = true;
 
-	public float pitchPower, rollPower, yawPower, enginePower;
-	[SerializeField] private GameObject BoomObj;
+    [SerializeField]
+    private float
+    flySpeed = 50f,
+    tangazhSpeed = 0.1f;
+
+    private float horizontalMovement;
+    private float Amount = 120;
+    [SerializeField] private GameObject BoomObj;
 	[SerializeField] private ParticleSystem partSyst;
 	[SerializeField] private ParticleSystem[] fire;
 	[SerializeField] private Rigidbody rb;
@@ -86,7 +92,9 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
     private void OnCollisionEnter(Collision collision)
     {
 		Debug.Log("wdwdwdwdwdwdwdwwwdwdwwdw: " + collision.gameObject + " " + canBoom);
-		
+		if(collision.gameObject.name != "SpaceShipBullet(Clone)")
+        {
+
 
         if (canBoom)
         {
@@ -128,6 +136,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
 
         }
+        }
 
 	}
 
@@ -136,7 +145,6 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
     private void NotifyCollision1(Vector3 col)
     {
 		Debug.Log("wef");
-
         if (canBoom)
         {
 
@@ -234,7 +242,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
         }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
+        if (PhotonNetwork.CurrentRoom.PlayerCount < 1)
         {
 
             Leave();
@@ -249,46 +257,18 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
         if (canFly)
 		{
 
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				if (pressingThrottle == false)
-				{
+            transform.Translate(Vector3.forward * flySpeed * Time.fixedDeltaTime);
 
-					pressingThrottle = true;
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
 
-				}
-				else if (pressingThrottle == true)
-				{
+            horizontalMovement += horizontal * Amount * Time.fixedDeltaTime;
+            float verticalMovement = Mathf.Lerp(0, 30, Mathf.Abs(vertical)) * Mathf.Sign(vertical);
+            float roll = Mathf.Lerp(0, 40, Mathf.Abs(horizontal)) * -Mathf.Sign(horizontal);
+            Debug.Log(Mathf.Sign(10));
 
-					pressingThrottle = false;
-
-				}
-			}
-			if (throttle)
-			{
-				transform.position += transform.forward * enginePower * Time.deltaTime;
-
-				activePitch = Input.GetAxisRaw("Vertical") * pitchPower * Time.deltaTime;
-				activeRoll = Input.GetAxisRaw("Horizontal") * rollPower * Time.deltaTime;
-				activeYaw = Input.GetAxisRaw("Yaw") * yawPower * Time.deltaTime;
-
-				transform.Rotate(activePitch * pitchPower,
-					activeYaw * yawPower,
-					-activeRoll * rollPower,
-					Space.Self);
-			}
-			else
-			{
-				activePitch = Input.GetAxisRaw("Vertical") * (pitchPower / 2) * Time.deltaTime;
-				activeRoll = Input.GetAxisRaw("Horizontal") * (rollPower / 2) * Time.deltaTime;
-				activeYaw = Input.GetAxisRaw("Yaw") * (yawPower / 2) * Time.deltaTime;
-
-				transform.Rotate(activePitch * pitchPower,
-					activeYaw * yawPower,
-					-activeRoll * rollPower,
-					Space.Self);
-			}
-		}
+            transform.localRotation = Quaternion.Euler(Vector3.up * horizontalMovement + Vector3.right * verticalMovement + Vector3.forward * roll);
+        }
 		else{
 			if (plane != null)
 			{

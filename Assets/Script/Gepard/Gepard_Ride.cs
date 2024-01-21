@@ -43,8 +43,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 		plane.SetActive(false);
 		Debug.Log(photonView1.IsMine);
 
-		
-	}
+    }
 
 	private void OnCollisionEnter(Collision collision)
 	{
@@ -75,11 +74,25 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
 
                 canRide = false;
+				StartCoroutine(WaitBeforeRestart());
             }
 		}
 	}
 
-
+	IEnumerator WaitBeforeRestart()
+	{
+		yield return new WaitForSeconds(5);
+		PhotonNetwork.LoadLevel(1);
+        engine1.Play();
+        expl.Stop();
+        explosion.Stop();
+        fire_sound.Stop();
+        foreach (var f in fire)
+        {
+            f.Stop();
+        }
+        canRide = true;
+	} 
 	
 
 
@@ -99,10 +112,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
             }
             Debug.Log("Boom");
             canRide = false;
-
-          
-
-
+            StartCoroutine(WaitBeforeRestart());
         }
     }
 
@@ -148,7 +158,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 			OpenM();
 		}
     
-		if(PhotonNetwork.CurrentRoom.PlayerCount < 2)
+		if(PhotonNetwork.CurrentRoom.PlayerCount < 1)
 		{
 
 			Leave();
@@ -162,6 +172,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 			float h = Input.GetAxis("Horizontal") * speedRotation;
 			Quaternion rotate = transform.rotation * Quaternion.Euler(0, h * speedRotation, 0);
 			transform.rotation = Quaternion.Lerp(transform.rotation, rotate, 15 * Time.deltaTime);
+			plane.SetActive(false);
 		}
 		else
 		{

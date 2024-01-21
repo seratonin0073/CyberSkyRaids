@@ -19628,7 +19628,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 2732059452851043718}
-  m_PlaneDistance: 0.4
+  m_PlaneDistance: 0.01
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -19702,7 +19702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2732059451502293460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 13.32}
+  m_LocalPosition: {x: 0, y: -0.04, z: 0.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63735,10 +63735,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressingThrottle: 1
-  pitchPower: 7
-  rollPower: 5
-  yawPower: 8
-  enginePower: 20
+  flySpeed: 50
+  tangazhSpeed: 0.1
   BoomObj: {fileID: 2732059452132610835}
   partSyst: {fileID: 2732059452132610838}
   fire:
