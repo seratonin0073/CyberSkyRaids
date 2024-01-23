@@ -12,7 +12,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         
 
-        Debug.Log(Instance);
+     
 
         if(GameObject.FindGameObjectsWithTag("xren").Length > 1)
         {
@@ -21,7 +21,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         if (Instance != null && Instance == GetComponent<RoomManager>())
         {
-            Debug.Log("Destroy");
+           
             Destroy(GameObject.FindGameObjectsWithTag("xren")[0]);
             return;
         }
@@ -40,7 +40,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        Debug.Log("wef");
+        
         if(scene.buildIndex >= 1)
         {
             PhotonNetwork.Instantiate(Path.Combine("PlayerManager"), Vector3.zero, Quaternion.identity);

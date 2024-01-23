@@ -2,9 +2,10 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviourPunCallbacks
 {
     private PhotonView photonView;
 
@@ -12,19 +13,23 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private GameObject AASpawn;
 
+    [SerializeField] private GameObject AA;
+
+    [SerializeField] private GameObject Drone;
+
+
     bool clients = false;
 
-    void Awake()
+    bool isStart = false;
+
+  
+
+    private void Awake()
     {
         photonView = GetComponent<PhotonView>();
-    }
-
-    private void Start()
-    {
-
         if (photonView.IsMine)
         {
-            Debug.Log(photonView.Owner.IsMasterClient);
+            
            
             if (photonView.Owner.IsMasterClient)
             {
@@ -46,19 +51,34 @@ public class PlayerManager : MonoBehaviour
 
             
         }
-       
+
+        isStart = true;
+
+
     }
+
+
+
+
+   
+
+
 
     private void CreateControllerClient()
     {
-        PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"),
-            AASpawn.transform.position, Quaternion.identity);
+      AA = PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"), AASpawn.transform.position, Quaternion.identity);
+      
+
+     
+
     }
+
+ 
 
     private void CreateControllerHost()
     {
-        PhotonNetwork.Instantiate(Path.Combine("Sci-fi-Plane (1)"),
-           DroneSpawn.transform.position, Quaternion.identity);
+       Drone = PhotonNetwork.Instantiate(Path.Combine("Sci-fi-Plane (1)"),
+           DroneSpawn.transform.position, DroneSpawn.transform.rotation);
     }
 
     private void CreateControllerFreeCamera()
@@ -66,4 +86,31 @@ public class PlayerManager : MonoBehaviour
         PhotonNetwork.Instantiate(Path.Combine("FreeCamera"),
            Vector3.zero, Quaternion.identity);
     }
+
+
+
+    private void FixedUpdate()
+    {
+
+
+
+
+        if (photonView.IsMine)
+        {
+            if (!photonView.Owner.IsMasterClient && AA == null && PhotonNetwork.NickName != "FreeCam")
+            {
+                AA = PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"), AASpawn.transform.position, Quaternion.identity);
+            }
+            if (photonView.Owner.IsMasterClient && Drone == null)
+            {
+                Drone = PhotonNetwork.Instantiate(Path.Combine("Sci-fi-Plane (1)"),
+                 DroneSpawn.transform.position, DroneSpawn.transform.rotation);
+            }
+
+        }
+
+
+
+    }
+
 }

@@ -33,7 +33,11 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 	[SerializeField] private AudioSource audio2;
 	[SerializeField] private AudioSource fire_sound;
 	[SerializeField] private Light[] lights;
-	
+    [SerializeField] private Camera cam;
+    [SerializeField] private AudioListener al;
+    [SerializeField] private GameObject planeObJ;
+
+    private float cor;
 
     [SerializeField] private PhotonView photonView; // Вова, тронешь строки с фотоном - убью    :D
 
@@ -64,19 +68,25 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 		boomRB.freezeRotation = false;
 		boomRB.constraints = RigidbodyConstraints.None;
 
+        if (photonView.IsMine)
+        {
+            AudioListener.volume = 1;
+        }
 
 
-		
+
     }
 
 
     public void SetTargetPoint(float time1)
     {
         T = time1;
-        S_DTT = T * V - 30;
+        S_DTT = T * V + 35;
 
 
-        Vector3 targetPosition = transform.position - targetObject.transform.up * S_DTT * Random.Range(0.8f, 1.2f);
+
+
+        Vector3 targetPosition = transform.position - targetObject.transform.up * S_DTT * Random.Range(0.5f, 1.5f);
        
 
         targetObject.transform.position = targetPosition;
@@ -91,7 +101,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter(Collision collision)
     {
-		Debug.Log("wdwdwdwdwdwdwdwwwdwdwwdw: " + collision.gameObject + " " + canBoom);
+		
 		if(collision.gameObject.name != "SpaceShipBullet(Clone)")
         {
 
@@ -126,16 +136,18 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
             fire_sound.Play();
             canBoom = false;
 
-         
+                Debug.Log(al);
+
+
                 photonView.RPC(nameof(NotifyCollision1), RpcTarget.All, collision.transform.position);
+                Debug.Log("RPC");
 
-				Debug.Log("RPC");
-
-		
-			
+                if(photonView.IsMine) AudioListener.volume = 0;
 
 
-        }
+
+
+            }
         }
 
 	}
@@ -144,7 +156,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
     [Photon.Pun.PunRPC]
     private void NotifyCollision1(Vector3 col)
     {
-		Debug.Log("wef");
+	
         if (canBoom)
         {
 
@@ -188,7 +200,15 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
     IEnumerator timerTag(float duration)
 	{
 		yield return new WaitForSeconds(duration);
+
         transform.gameObject.tag = "Untagged";
+
+        yield return new WaitForSeconds(duration*6);
+
+        if (photonView.IsMine) PhotonNetwork.Destroy(planeObJ);
+
+
+
     }
 
 
@@ -250,7 +270,14 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
         }
 
 
-
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            cor += 1;
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            cor -= 1;
+        }
 
 
 
@@ -263,9 +290,9 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
             float vertical = Input.GetAxis("Vertical");
 
             horizontalMovement += horizontal * Amount * Time.fixedDeltaTime;
-            float verticalMovement = Mathf.Lerp(0, 30, Mathf.Abs(vertical)) * Mathf.Sign(vertical);
+            float verticalMovement = Mathf.Lerp(0, 50, Mathf.Abs(vertical)) * Mathf.Sign(vertical);
             float roll = Mathf.Lerp(0, 40, Mathf.Abs(horizontal)) * -Mathf.Sign(horizontal);
-            Debug.Log(Mathf.Sign(10));
+      
 
             transform.localRotation = Quaternion.Euler(Vector3.up * horizontalMovement + Vector3.right * verticalMovement + Vector3.forward * roll);
         }

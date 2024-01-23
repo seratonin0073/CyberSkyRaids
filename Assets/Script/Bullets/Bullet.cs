@@ -5,7 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float Speed = 10f;
+    [SerializeField] private float Speed = 615f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float TimeLife = 5f;
     private static GameObject obj = null;
