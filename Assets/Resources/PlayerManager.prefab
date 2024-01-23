@@ -71,6 +71,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DroneSpawn: {fileID: 4640855985400516758}
   AASpawn: {fileID: 6633993942677854947}
+  AA: {fileID: 0}
+  Drone: {fileID: 0}
 --- !u!1 &4640855985400516758
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,14 +96,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4640855985400516758}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 624.38855, y: 46.20259, z: 973.22906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 628.06, y: 247.9, z: 1494.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8496758498076037250}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6633993942677854947
 GameObject:
   m_ObjectHideFlags: 0

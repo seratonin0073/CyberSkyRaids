@@ -29,7 +29,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
 	[SerializeField] private GameObject PauseMeny;
 
-
+    [SerializeField] private AudioListener al;
 
     void Start()
 	{
@@ -37,11 +37,15 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
         {
             Destroy(plane);
         }
+        if (photonView1.IsMine)
+        {
+            AudioListener.volume = 1;
+        }
         engine1.Play();
         canRide = true;
 		rb = GetComponent<Rigidbody>();
 		plane.SetActive(false);
-		Debug.Log(photonView1.IsMine);
+		
 
     }
 
@@ -49,7 +53,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 	{
 
 
-        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet"))
+        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet") && collision.transform.name != "Bullet(Clone)")
 		{
 			if(canRide)
 			{
@@ -61,17 +65,13 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 				{
 					f.Play();
 				}
-				Debug.Log("Boom");
 
-			
+                photonView1.RPC(nameof(NotifyCollision), RpcTarget.All);
 
-               
-                    photonView1.RPC(nameof(NotifyCollision), RpcTarget.All);
-
-					Debug.Log("RPC_AA");
-
-             
-
+                if (photonView1.IsMine)
+                {
+                    AudioListener.volume = 0;
+                }
 
                 canRide = false;
 				StartCoroutine(WaitBeforeRestart());
@@ -81,7 +81,8 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
 	IEnumerator WaitBeforeRestart()
 	{
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(15);
+        /*
 		PhotonNetwork.LoadLevel(1);
         engine1.Play();
         expl.Stop();
@@ -92,7 +93,17 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
             f.Stop();
         }
         canRide = true;
-	} 
+        */
+
+        if(photonView1.IsMine) PhotonNetwork.Destroy(this.gameObject);
+
+
+
+
+
+
+
+    } 
 	
 
 

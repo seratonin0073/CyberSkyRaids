@@ -23,12 +23,12 @@ public class TestCam : MonoBehaviour
     /// <summary>
     /// Normal speed of camera movement.
     /// </summary>
-    public float movementSpeed = 10f;
+    public float movementSpeed = 5f;
 
     /// <summary>
     /// Speed of camera movement when shift is held down,
     /// </summary>
-    public float fastMovementSpeed = 100f;
+    public float fastMovementSpeed = 20f;
 
     /// <summary>
     /// Sensitivity for free look.

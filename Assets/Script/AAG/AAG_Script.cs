@@ -1,9 +1,10 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AAG_Script : MonoBehaviour
+public class AAG_Script : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject Muzzle;
@@ -11,8 +12,8 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float range;
     [SerializeField] private float RotateSpeed = 3f;
-    [SerializeField] private float CoolDown = 3f;
-    [SerializeField] private bool IsShoot = false;
+    [SerializeField] private float CoolDown = 1f;
+    [SerializeField] private bool IsShoot = true;
     [SerializeField] private bool IsShootCD = false;
     [SerializeField] private GameObject[] guns;
     [SerializeField] private ParticleSystem muzzleFire0;
@@ -30,6 +31,7 @@ public class AAG_Script : MonoBehaviour
     [SerializeField] private AudioSource fire1;
     private bool isDestroyed = false;
     GameObject TargetDrone;
+    [SerializeField] private PhotonView photonView1;
 
 
 
@@ -45,8 +47,8 @@ public class AAG_Script : MonoBehaviour
     void Start()
     {
         // bullet_speed = bulletPrefab.GetComponent<Bullet>().GetSpeed();
-        drone_speed = 20;
-        bullet_speed = 100;
+        drone_speed = 50;
+        bullet_speed = 615;
 
         InvokeRepeating("FindTarget", 0f, 0.3f);
      
@@ -67,9 +69,9 @@ public class AAG_Script : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
+    
 
-
-        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet") && !isDestroyed)
+        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet") && !isDestroyed && collision.transform.name != "Bullet(Clone)")
         {
                 boom1.Play();
                 fire.Play();
@@ -80,24 +82,52 @@ public class AAG_Script : MonoBehaviour
                     f.Play();
                 }
                 isDestroyed = true;
+                photonView1.RPC(nameof(NotifyCollision), RpcTarget.All);
+
         }
     }
 
-
-    IEnumerator Shoot()
+    [Photon.Pun.PunRPC]
+    private void NotifyCollision()
     {
-        IsShoot = false;
-        GameObject bullet = Instantiate(bulletPrefab, guns[0].transform.position, transform.rotation * Quaternion.Euler(0, -270, 0));
-        GameObject bullet1 = Instantiate(bulletPrefab, guns[1].transform.position, transform.rotation * Quaternion.Euler(0, -270, 0));
-        muzzleFire0.Play();
-        muzzleFire1.Play();
+  
+        
+
+        boom1.Play();
         fire.Play();
-        bullet.transform.parent = null;
-        bullet1.transform.parent = null;
-        bullet.GetComponent<Bullet>().TakeForce();
-        bullet1.GetComponent<Bullet>().TakeForce();
-        yield return new WaitForSeconds(CoolDown);
-        IsShoot = true;
+        Expl.Play();
+        fire1.Play();
+        foreach (var f in fireEff)
+        {
+            f.Play();
+        }
+        isDestroyed = true;
+
+
+    }
+
+
+
+        IEnumerator Shoot()
+    {
+        
+
+            IsShoot = false;
+            if (IsShootCD)
+            {
+            GameObject bullet = PhotonNetwork.Instantiate("Bullet", guns[0].transform.position, transform.rotation * Quaternion.Euler(0, 90, 0));
+            GameObject bullet1 = PhotonNetwork.Instantiate("Bullet", guns[1].transform.position, transform.rotation * Quaternion.Euler(0, 90, 0));
+            muzzleFire0.Play();
+            muzzleFire1.Play();
+            fire.Play();
+            bullet.transform.parent = null;
+            bullet1.transform.parent = null;
+            bullet.GetComponent<Bullet>().TakeForce();
+            bullet1.GetComponent<Bullet>().TakeForce();
+            }
+            yield return new WaitForSeconds(CoolDown);
+            IsShoot = true;
+        
     }
 
 
@@ -122,8 +152,8 @@ public class AAG_Script : MonoBehaviour
                 
                 targetDrone = CurrentTarget.GetComponent<SpaceshipController>().TargetPointGet();
                 CurrentTarget.GetComponent<SpaceshipController>().SetTargetPoint(T);
-               
-                IsShoot = true;
+
+                IsShootCD = true;
 
 
             }
@@ -141,7 +171,7 @@ public class AAG_Script : MonoBehaviour
         {
             this.target = null;
             this.targetDrone = null;
-            IsShoot = false;
+            IsShootCD = false;
         }
 
 
@@ -155,13 +185,13 @@ public class AAG_Script : MonoBehaviour
 
         if (target != null)
         {
-            IsShootCD = true;
+            
             Quaternion look = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, look * Quaternion.Euler(0, 90, 0), Time.deltaTime + RotateSpeed);
 
             if (IsShoot)
             {
-
+                
                 StartCoroutine(Shoot());
 
             }
