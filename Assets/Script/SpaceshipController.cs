@@ -270,14 +270,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
         }
 
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            cor += 1;
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            cor -= 1;
-        }
+   
 
 
 

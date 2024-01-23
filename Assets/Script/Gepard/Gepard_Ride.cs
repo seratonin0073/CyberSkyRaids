@@ -65,16 +65,8 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 				{
 					f.Play();
 				}
-				Debug.Log("Boom");
 
-			
-
-               
-                    photonView1.RPC(nameof(NotifyCollision), RpcTarget.All);
-
-					Debug.Log("RPC_AA");
-
-                Debug.Log(al);
+                photonView1.RPC(nameof(NotifyCollision), RpcTarget.All);
 
                 if (photonView1.IsMine)
                 {
