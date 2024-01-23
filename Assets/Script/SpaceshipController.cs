@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SpaceshipController : MonoBehaviourPunCallbacks
 {
@@ -43,6 +44,9 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject PauseMeny;
 
+    [SerializeField] private TextMeshPro NS; // NoSignal text
+
+
     Rigidbody boomRB;
 
 	private bool canFly;
@@ -70,7 +74,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
-            AudioListener.volume = 1;
+            AudioListener.pause = false;
         }
 
 
@@ -142,7 +146,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
                 photonView.RPC(nameof(NotifyCollision1), RpcTarget.All, collision.transform.position);
                 Debug.Log("RPC");
 
-                if(photonView.IsMine) AudioListener.volume = 0;
+                if(photonView.IsMine) AudioListener.pause = true;
 
 
 

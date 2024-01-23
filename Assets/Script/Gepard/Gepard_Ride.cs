@@ -39,7 +39,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
         }
         if (photonView1.IsMine)
         {
-            AudioListener.volume = 1;
+            AudioListener.pause = true;
         }
         engine1.Play();
         canRide = true;
@@ -70,7 +70,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
                 if (photonView1.IsMine)
                 {
-                    AudioListener.volume = 0;
+                    AudioListener.pause = false;
                 }
 
                 canRide = false;
