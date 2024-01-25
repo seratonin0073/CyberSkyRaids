@@ -50,6 +50,12 @@ public class TestCam : MonoBehaviour
     /// </summary>
     private bool looking = false;
 
+   
+    public float smoothTime = 0.2f;
+
+    private Vector2 currentRotation;
+    private Vector2 smoothVelocity;
+
 
     [SerializeField] private PhotonView photonView;
 
@@ -104,9 +110,22 @@ public class TestCam : MonoBehaviour
 
         if (looking)
         {
-            float newRotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * freeLookSensitivity;
-            float newRotationY = transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * freeLookSensitivity;
-            transform.localEulerAngles = new Vector3(newRotationY, newRotationX, 0f);
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+
+            // Рассчитываем новые углы поворота
+            currentRotation.x += mouseX * freeLookSensitivity;
+            currentRotation.y -= mouseY * freeLookSensitivity;
+
+            // Применяем сглаживание
+            currentRotation.x = Mathf.Lerp(currentRotation.x, currentRotation.x, smoothTime);
+            currentRotation.y = Mathf.Lerp(currentRotation.y, currentRotation.y, smoothTime);
+
+            // Ограничиваем угол поворота по Y между -90 и 90 градусами
+            currentRotation.y = Mathf.Clamp(currentRotation.y, -90f, 90f);
+
+            // Применяем углы поворота к трансформации
+            transform.localRotation = Quaternion.Euler(currentRotation.y, currentRotation.x, 0f);
         }
 
         float axis = Input.GetAxis("Mouse ScrollWheel");
