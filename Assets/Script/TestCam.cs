@@ -114,16 +114,10 @@ public class TestCam : MonoBehaviour
 
         if (looking)
         {
-            float mouseY = Input.GetAxis("Mouse Y") * speedRotationX;
+            float newRotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * freeLookSensitivity;
+            float newRotationY = transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * freeLookSensitivity;
+            transform.localEulerAngles = new Vector3(newRotationY, newRotationX, 0f);
 
-
-            float x0 = Input.GetAxis("Mouse X") * speedRotationX;
-
-            Quaternion rotate = transform.rotation * Quaternion.Euler(mouseY * speedRotationX, x0 * speedRotationX, 0);
-
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotate, RotationInt * Time.deltaTime);
-
-    
         }
 
         float axis = Input.GetAxis("Mouse ScrollWheel");

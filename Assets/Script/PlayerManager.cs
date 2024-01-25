@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
            
             if (photonView.Owner.IsMasterClient)
             {
-                CreateControllerHost();
+                CreateControllerFreeCamera();
 
 
 

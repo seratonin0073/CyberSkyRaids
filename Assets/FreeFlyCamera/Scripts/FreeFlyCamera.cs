@@ -82,7 +82,7 @@ public class FreeFlyCamera : MonoBehaviour
 
     private CursorLockMode _wantedMode;
 
-    private float _currentIncrease = 1;
+    private float _currentIncrease = 0;
     private float _currentIncreaseMem = 0;
 
     private Vector3 _initPosition;
