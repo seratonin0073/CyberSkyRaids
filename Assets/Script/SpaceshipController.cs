@@ -74,7 +74,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
-            AudioListener.pause = false;
+            AudioListener.volume = 1;
         }
 
 
@@ -146,7 +146,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
                 photonView.RPC(nameof(NotifyCollision1), RpcTarget.All, collision.transform.position);
                 Debug.Log("RPC");
 
-                if(photonView.IsMine) AudioListener.pause = true;
+                if(photonView.IsMine) AudioListener.volume = 0;
 
 
 
@@ -189,7 +189,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
             audio2.Play();
             fire_sound.Play();
             canBoom = false;
-          
+            if (photonView.IsMine) AudioListener.volume = 0;
 
 
         }
@@ -287,11 +287,12 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
             float vertical = Input.GetAxis("Vertical");
 
             horizontalMovement += horizontal * Amount * Time.fixedDeltaTime;
-            float verticalMovement = Mathf.Lerp(0, 50, Mathf.Abs(vertical)) * Mathf.Sign(vertical);
+            float verticalMovement = Mathf.Lerp(0, 90, Mathf.Abs(vertical)) * Mathf.Sign(vertical);
             float roll = Mathf.Lerp(0, 40, Mathf.Abs(horizontal)) * -Mathf.Sign(horizontal);
       
 
             transform.localRotation = Quaternion.Euler(Vector3.up * horizontalMovement + Vector3.right * verticalMovement + Vector3.forward * roll);
+
         }
 		else{
 			if (plane != null)

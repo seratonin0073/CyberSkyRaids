@@ -4,18 +4,23 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
     private PhotonView photonView;
 
-    [SerializeField] private GameObject DroneSpawn;
+    [SerializeField] private GameObject[] DroneSpawn;
 
-    [SerializeField] private GameObject AASpawn;
+    [SerializeField] private GameObject[] AASpawn;
+
+    [SerializeField] private GameObject[] HungarSpawn;
 
     [SerializeField] private GameObject AA;
 
     [SerializeField] private GameObject Drone;
+
+    [SerializeField] private GameObject Hungar;
 
 
     bool clients = false;
@@ -66,19 +71,21 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void CreateControllerClient()
     {
-      AA = PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"), AASpawn.transform.position, Quaternion.identity);
-      
+ 
+      AA = PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"), AASpawn[Random.Range(0, AASpawn.Length-1)].transform.position, Quaternion.identity);
+        
+        Hungar = PhotonNetwork.Instantiate(Path.Combine("Hungar"), HungarSpawn[Random.Range(0, HungarSpawn.Length - 1)].transform.position, Quaternion.identity);
 
-     
 
     }
 
- 
+
 
     private void CreateControllerHost()
     {
        Drone = PhotonNetwork.Instantiate(Path.Combine("Sci-fi-Plane (1)"),
-           DroneSpawn.transform.position, DroneSpawn.transform.rotation);
+           DroneSpawn[Random.Range(0, DroneSpawn.Length - 1)].transform.position, DroneSpawn[Random.Range(0, DroneSpawn.Length - 1)].transform.rotation);
+  
     }
 
     private void CreateControllerFreeCamera()
@@ -91,7 +98,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-
+        
 
 
 
@@ -99,18 +106,40 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             if (!photonView.Owner.IsMasterClient && AA == null && PhotonNetwork.NickName != "FreeCam")
             {
-                AA = PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"), AASpawn.transform.position, Quaternion.identity);
+                AA = PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"), AASpawn[Random.Range(0, AASpawn.Length - 1)].transform.position, Quaternion.identity);
             }
             if (photonView.Owner.IsMasterClient && Drone == null)
             {
                 Drone = PhotonNetwork.Instantiate(Path.Combine("Sci-fi-Plane (1)"),
-                 DroneSpawn.transform.position, DroneSpawn.transform.rotation);
+                 DroneSpawn[Random.Range(0, DroneSpawn.Length - 1)].transform.position, DroneSpawn[Random.Range(0, DroneSpawn.Length - 1)].transform.rotation);
             }
 
+            if (Hungar == null && (!photonView.Owner.IsMasterClient && PhotonNetwork.NickName != "FreeCam"))
+            {
+                photonView.RPC(nameof(LeaveOnRound), RpcTarget.All);
+                LeaveOnRound();
+            }
+
+
         }
+
+       
 
 
 
     }
+
+
+    [Photon.Pun.PunRPC]
+
+    public void LeaveOnRound()
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("Lobbi");
+
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+
 
 }

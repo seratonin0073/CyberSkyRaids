@@ -80,8 +80,9 @@ public class Gepard_Gun : MonoBehaviour
 
 			angleToEnemy = Vector3.SignedAngle(dirtar, transform.forward, Vector3.up);
 
+			
 
-
+			
 
 			EnemyMark.rectTransform.localPosition = new Vector3(dirtar.x / scaleRadar, dirtar.z / scaleRadar, EnemyMark.rectTransform.localPosition.z);
 
@@ -135,13 +136,13 @@ public class Gepard_Gun : MonoBehaviour
 
 			GunTower.transform.rotation = Quaternion.Lerp(GunTower.transform.rotation, rotate, RotationInt * Time.deltaTime);
 
+            MeMark.rectTransform.rotation = Quaternion.Euler(0, 0, -GunTower.transform.rotation.eulerAngles.y + 180);
 
 
 
 
 
-
-			y0 += Input.GetAxis("Mouse Y") * speedRotationY;
+            y0 += Input.GetAxis("Mouse Y") * speedRotationY;
 
 			y0 = Mathf.Clamp(y0, minAngle, maxAngle);
 
