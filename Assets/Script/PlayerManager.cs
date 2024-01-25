@@ -50,7 +50,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             if (photonView.Owner.IsMasterClient)
             {
                 CreateControllerHost();
-                
+
+
 
             }
             else if (!photonView.Owner.IsMasterClient && PhotonNetwork.NickName != "FreeCam")
@@ -114,7 +115,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-        
+        return;
 
 
 

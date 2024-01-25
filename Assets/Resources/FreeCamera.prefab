@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8900859062694940317}
   - component: {fileID: 3062104303674051211}
   - component: {fileID: 2915316637710046696}
+  - component: {fileID: 1690497774215878081}
   m_Layer: 6
   m_Name: FreeCamera
   m_TagString: MainCamera
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761947190259724618}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4a21c343fe202742971b9f267d1bf53, type: 3}
   m_Name: 
@@ -107,6 +108,10 @@ MonoBehaviour:
   freeLookSensitivity: 3
   zoomSensitivity: 10
   fastZoomSensitivity: 50
+  smoothTime: 0.2
+  speedRotationX: 2.5
+  speedRotationY: 2.5
+  RotationInt: 50
   photonView: {fileID: 8637901481708893868}
 --- !u!114 &8637901481708893868
 MonoBehaviour:
@@ -237,3 +242,29 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &1690497774215878081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761947190259724618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436275a13d4459746955fc6db5953473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _active: 1
+  _enableRotation: 1
+  _mouseSense: 1.8
+  _enableTranslation: 1
+  _translationSpeed: 55
+  _enableMovement: 1
+  _movementSpeed: 10
+  _boostedSpeed: 50
+  _boostSpeed: 304
+  _moveUp: 32
+  _moveDown: 306
+  _enableSpeedAcceleration: 1
+  _speedAccelerationFactor: 1.5
+  _initPositonButton: 114

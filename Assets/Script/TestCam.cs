@@ -28,7 +28,7 @@ public class TestCam : MonoBehaviour
     /// <summary>
     /// Speed of camera movement when shift is held down,
     /// </summary>
-    public float fastMovementSpeed = 20f;
+    public float fastMovementSpeed = 51f;
 
     /// <summary>
     /// Sensitivity for free look.
@@ -48,13 +48,17 @@ public class TestCam : MonoBehaviour
     /// <summary>
     /// Set to true when free looking (on right mouse button).
     /// </summary>
-    private bool looking = false;
+    private bool looking = true;
 
    
     public float smoothTime = 0.2f;
 
     private Vector2 currentRotation;
     private Vector2 smoothVelocity;
+
+    [SerializeField] private float speedRotationX = 2.5f;
+    [SerializeField] private float speedRotationY = 2.5f;
+    [SerializeField] private float RotationInt = 50f;
 
 
     [SerializeField] private PhotonView photonView;
@@ -110,22 +114,16 @@ public class TestCam : MonoBehaviour
 
         if (looking)
         {
-            float mouseX = Input.GetAxis("Mouse X");
-            float mouseY = Input.GetAxis("Mouse Y");
+            float mouseY = Input.GetAxis("Mouse Y") * speedRotationX;
 
-            // Рассчитываем новые углы поворота
-            currentRotation.x += mouseX * freeLookSensitivity;
-            currentRotation.y -= mouseY * freeLookSensitivity;
 
-            // Применяем сглаживание
-            currentRotation.x = Mathf.Lerp(currentRotation.x, currentRotation.x, smoothTime);
-            currentRotation.y = Mathf.Lerp(currentRotation.y, currentRotation.y, smoothTime);
+            float x0 = Input.GetAxis("Mouse X") * speedRotationX;
 
-            // Ограничиваем угол поворота по Y между -90 и 90 градусами
-            currentRotation.y = Mathf.Clamp(currentRotation.y, -90f, 90f);
+            Quaternion rotate = transform.rotation * Quaternion.Euler(mouseY * speedRotationX, x0 * speedRotationX, 0);
 
-            // Применяем углы поворота к трансформации
-            transform.localRotation = Quaternion.Euler(currentRotation.y, currentRotation.x, 0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotate, RotationInt * Time.deltaTime);
+
+    
         }
 
         float axis = Input.GetAxis("Mouse ScrollWheel");
@@ -135,14 +133,7 @@ public class TestCam : MonoBehaviour
             transform.position = transform.position + transform.forward * axis * zoomSensitivity;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            StartLooking();
-        }
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            StopLooking();
-        }
+        StartLooking();
     }
 
     void OnDisable()
