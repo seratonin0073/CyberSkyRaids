@@ -74,7 +74,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             Destroy(UI);
         }
 
-        Debug.Log("Started!");
+        if(photonView.IsMine) Debug.Log("Started!");
 
     }
 
@@ -111,24 +111,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     }
 
 
-    private void Start()
-    {
-
-        if (FreeCamera == null && !photonView.IsMine) return;
-
-        AA = GameObject.FindGameObjectWithTag("tank");
-
-        Drone = GameObject.FindGameObjectWithTag("Drone");
-
-        Debug.Log(GameObject.FindGameObjectWithTag("Drone"));
-
-        FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].Follow = Drone.transform;
-        FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].LookAt = Drone.transform;
-        FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].Follow = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
-        FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].LookAt = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
-
-
-    }
 
 
 
@@ -136,7 +118,25 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-        return;
+        if(Drone == null)
+        {
+            Drone = GameObject.FindGameObjectWithTag("Drone");
+
+            FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].Follow = Drone.transform;
+            FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].LookAt = Drone.transform;
+     
+
+        }
+
+        if(AA == null)
+        {
+
+            AA = GameObject.FindGameObjectWithTag("tank");
+
+            FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].Follow = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
+            FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].LookAt = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
+
+        }
 
 
 
