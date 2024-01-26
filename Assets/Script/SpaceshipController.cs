@@ -287,7 +287,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
             float vertical = Input.GetAxis("Vertical");
 
             horizontalMovement += horizontal * Amount * Time.fixedDeltaTime;
-            float verticalMovement = Mathf.Lerp(0, 90, Mathf.Abs(vertical)) * Mathf.Sign(vertical);
+            float verticalMovement = Mathf.Lerp(0, 90, Mathf.Abs(vertical)) * Mathf.Sign(vertical) * tangazhSpeed;
             float roll = Mathf.Lerp(0, 40, Mathf.Abs(horizontal)) * -Mathf.Sign(horizontal);
       
 

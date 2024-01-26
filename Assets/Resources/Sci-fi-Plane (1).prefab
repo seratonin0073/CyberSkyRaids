@@ -63830,7 +63830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressingThrottle: 1
   flySpeed: 50
-  tangazhSpeed: 0.1
+  tangazhSpeed: 0.5
   BoomObj: {fileID: 2732059452132610835}
   partSyst: {fileID: 2732059452132610838}
   fire:
