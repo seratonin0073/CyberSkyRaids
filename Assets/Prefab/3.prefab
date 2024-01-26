@@ -207,11 +207,11 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 0
-  m_SplineCurvature: 1
+  m_SplineCurvature: 0.5
   m_Orbits:
   - m_Height: 15
     m_Radius: 20
-  - m_Height: 3
+  - m_Height: 7
     m_Radius: 30
   - m_Height: -15
     m_Radius: 20
