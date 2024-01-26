@@ -7,7 +7,7 @@ using Photon.Pun;
 
 public class FreeCameraScript : MonoBehaviour
 {
-    [SerializeField] private CinemachineFreeLook[] CFL;
+    [SerializeField] public CinemachineFreeLook[] CFL;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private float Multiply = 3f;
     private PhotonView photonView;
@@ -27,8 +27,17 @@ public class FreeCameraScript : MonoBehaviour
 
     }
 
+
+
     private void Update()
     {
+        if (CFL[0].Follow == null || CFL[0].LookAt == null) return;
+
+        if (CFL[1].Follow == null || CFL[1].LookAt == null) return;
+
+
+        if (!photonView.IsMine) return;
+
         FOV += Input.GetAxis("Mouse ScrollWheel") * Multiply * Time.deltaTime;
         FOV = Mathf.Clamp(FOV, 1, 150);
 

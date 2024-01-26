@@ -35,6 +35,8 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject PanelUI;
 
+    [SerializeField] private GameObject MDL;
+
     void Start()
 	{
         
@@ -54,6 +56,11 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
 
 
+    }
+
+    public GameObject GetMDL()
+    {
+        return MDL;
     }
 
 	private void OnCollisionEnter(Collision collision)

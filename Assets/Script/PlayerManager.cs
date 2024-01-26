@@ -23,6 +23,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject Hungar;
 
+    [SerializeField] private GameObject FreeCamera;
+
     private int countRound = 0;
 
     private int scoreAA = 0;
@@ -49,10 +51,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
            
             if (photonView.Owner.IsMasterClient)
             {
-                CreateControllerFreeCamera();
+                CreateControllerHost();
+               
 
-
-
+         
             }
             else if (!photonView.Owner.IsMasterClient && PhotonNetwork.NickName != "FreeCam")
             {
@@ -107,10 +109,21 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void CreateControllerFreeCamera()
     {
-        PhotonNetwork.Instantiate(Path.Combine("FreeCamera"),
+        FreeCamera = PhotonNetwork.Instantiate(Path.Combine("FreeCamera"),
            Vector3.zero, Quaternion.identity);
     }
 
+    private void Start()
+    {
+        if (FreeCamera == null) return;
+
+        FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].Follow = Drone.GetComponent<DroneGetter>().GetMDL().transform;
+        FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].LookAt = Drone.GetComponent<DroneGetter>().GetMDL().transform;
+        FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].Follow = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
+        FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].LookAt = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
+
+
+    }
 
 
     private void FixedUpdate()
