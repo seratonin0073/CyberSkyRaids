@@ -118,9 +118,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
+        if (photonView.IsMine)
+        {
+        Debug.Log(FreeCamera);
         if(Drone == null)
         {
-            Drone = GameObject.FindGameObjectWithTag("Drone");
+            Drone = SpaceshipController.Instance;
 
             FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].Follow = Drone.transform;
             FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].LookAt = Drone.transform;
@@ -131,7 +134,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         if(AA == null)
         {
 
-            AA = GameObject.FindGameObjectWithTag("tank");
+            AA = Gepard_Ride.Instance;
 
             FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].Follow = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
             FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].LookAt = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
@@ -140,8 +143,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
 
 
-        if (photonView.IsMine)
-        {
+        
             if (!photonView.Owner.IsMasterClient && AA == null && PhotonNetwork.NickName != "FreeCam")
             {
                 AA = PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"), AASpawn[Random.Range(0, AASpawn.Length - 1)].transform.position, Quaternion.identity);

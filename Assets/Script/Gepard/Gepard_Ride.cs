@@ -11,6 +11,9 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
 	private float horizontal;
 	private float vertical;
+
+    public static GameObject Instance;
+
 	[SerializeField] private float speed = 6f;
     [SerializeField] private float speed_a = 2f;
     private float speed_a1 = 2f;
@@ -36,6 +39,11 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject PanelUI;
 
     [SerializeField] private GameObject MDL;
+
+    private void Awake()
+    {
+        Instance = this.gameObject;
+    }
 
     void Start()
 	{

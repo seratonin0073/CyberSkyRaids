@@ -17,6 +17,9 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
     flySpeed = 50f,
     tangazhSpeed = 0.1f;
 
+    public static GameObject Instance;
+
+
     private float horizontalMovement;
     private float Amount = 120;
     [SerializeField] private GameObject BoomObj;
@@ -53,7 +56,11 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
 	private float activeRoll, activePitch, activeYaw;
 
-	private void Start()
+    private void Awake()
+    {
+        Instance = this.gameObject;
+    }
+    private void Start()
 	{
 		if (!photonView.IsMine)
 		{
