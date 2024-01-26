@@ -235,7 +235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8087418511989204139
 RectTransform:
   m_ObjectHideFlags: 0
@@ -486,6 +486,7 @@ MonoBehaviour:
   AA: {fileID: 0}
   Drone: {fileID: 0}
   Hungar: {fileID: 0}
+  FreeCamera: {fileID: 0}
   ScoreA: {fileID: 9194992200512613528}
   ScoreD: {fileID: 5324928053164413602}
   UI: {fileID: 0}

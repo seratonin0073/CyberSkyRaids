@@ -49,6 +49,8 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
     [SerializeField] private TextMeshPro NS; // NoSignal text
 
+    private bool isCol = true;
+
 
     Rigidbody boomRB;
 
@@ -112,7 +114,8 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter(Collision collision)
     {
-		
+        if (isCol) return;
+
 		if(collision.gameObject.name != "SpaceShipBullet(Clone)")
         {
 
@@ -278,6 +281,12 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
             Leave();
 
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            isCol = !isCol;
         }
 
 

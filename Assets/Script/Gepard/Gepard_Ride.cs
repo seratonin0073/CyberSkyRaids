@@ -40,6 +40,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject MDL;
 
+    private bool isCol = true;
     private void Awake()
     {
         Instance = this.gameObject;
@@ -73,8 +74,8 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
 	private void OnCollisionEnter(Collision collision)
 	{
-        
 
+        if (isCol) return;
        
 
         if ((collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet") || collision.transform.name == "Acid") && collision.transform.name != "Bullet(Clone)")
@@ -201,7 +202,12 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
         if (Input.GetKey(KeyCode.Escape)) OpenM();
 
         if (PhotonNetwork.CurrentRoom.PlayerCount < 1) Leave();
-  
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            isCol = !isCol;
+        }
+
         if (canRide)
 		{
 			float forw = Input.GetAxis("Vertical_Gepard");

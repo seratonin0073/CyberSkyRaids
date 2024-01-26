@@ -8,6 +8,7 @@ TagManager:
   - Drone
   - DroneCollider
   - xren
+  - tank
   layers:
   - Default
   - TransparentFX
