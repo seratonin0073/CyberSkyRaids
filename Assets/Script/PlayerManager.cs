@@ -93,7 +93,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         
         Hungar = PhotonNetwork.Instantiate(Path.Combine("Hungar"), HungarSpawn[Random.Range(0, HungarSpawn.Length - 1)].transform.position, Quaternion.identity);
 
-        photonView.RPC(nameof(SendAA), RpcTarget.All, AA);
+        
     }
 
 
@@ -102,7 +102,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
        Drone = PhotonNetwork.Instantiate(Path.Combine("Sci-fi-Plane (1)"),
            DroneSpawn[Random.Range(0, DroneSpawn.Length - 1)].transform.position, DroneSpawn[Random.Range(0, DroneSpawn.Length - 1)].transform.rotation);
-        photonView.RPC(nameof(SendDrone), RpcTarget.All, Drone);
+       
     }
 
     private void CreateControllerFreeCamera()
@@ -112,24 +112,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     }
 
 
-    [Photon.Pun.PunRPC]
-
-    private void SendAA(GameObject Anti)
-    {
-        AA = Anti;
-    }
-
-    [Photon.Pun.PunRPC]
-
-    private void SendDrone(GameObject Droned)
-    {
-        Drone = Droned;
-    }
-
     private void Start()
     {
 
         if (FreeCamera == null) return;
+
+        AA = GameObject.FindGameObjectWithTag("tank");
+
+        Drone = GameObject.FindGameObjectWithTag("Drone");
 
 
         FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].Follow = Drone.GetComponent<DroneGetter>().GetMDL().transform;

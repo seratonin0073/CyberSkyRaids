@@ -1476,7 +1476,7 @@ GameObject:
   - component: {fileID: 1538242831228637570}
   m_Layer: 0
   m_Name: sci-Fi-Car
-  m_TagString: Untagged
+  m_TagString: tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
