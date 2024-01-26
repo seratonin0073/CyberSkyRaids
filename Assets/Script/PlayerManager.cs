@@ -120,7 +120,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-        Debug.Log(FreeCamera);
+     
         if(Drone == null)
         {
             Drone = SpaceshipController.Instance;
@@ -135,6 +135,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
 
             AA = Gepard_Ride.Instance;
+
 
             FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].Follow = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
             FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].LookAt = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
