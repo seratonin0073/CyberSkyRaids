@@ -54,13 +54,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
                 CreateControllerHost();
               
             }
-            else if (!photonView.Owner.IsMasterClient && PhotonNetwork.NickName != "FreeCam")
+            else if (!photonView.Owner.IsMasterClient)
             {
                 CreateControllerClient();
-                clients = true;
-            }else if (PhotonNetwork.NickName == "FreeCam")
-            {
-                CreateControllerFreeCamera();
+            
             }
 
             
@@ -74,7 +71,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             Destroy(UI);
         }
 
-        if(photonView.IsMine) Debug.Log("Started!");
+   
 
     }
 
@@ -104,11 +101,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
        
     }
 
-    private void CreateControllerFreeCamera()
-    {
-        FreeCamera = PhotonNetwork.Instantiate(Path.Combine("FreeCamera"),
-           Vector3.zero, Quaternion.identity);
-    }
+
 
 
 
@@ -121,28 +114,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
      
-        if(Drone == null)
-        {
-            Drone = SpaceshipController.Instance;
-
-            FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].Follow = Drone.transform;
-            FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[0].LookAt = Drone.transform;
-     
-
-        }
-
-        if(AA == null)
-        {
-
-            AA = Gepard_Ride.Instance;
-
-
-            FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].Follow = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
-            FreeCamera.gameObject.GetComponent<FreeCameraScript>().CFL[1].LookAt = AA.GetComponent<Gepard_Ride>().GetMDL().transform;
-
-        }
-
-
 
         
             if (!photonView.Owner.IsMasterClient && AA == null && PhotonNetwork.NickName != "FreeCam")
@@ -154,40 +125,23 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             }
             if (photonView.Owner.IsMasterClient && Drone == null)
             {
-                Drone = PhotonNetwork.Instantiate(Path.Combine("Sci-fi-Plane (1)"),
-                 DroneSpawn[Random.Range(0, DroneSpawn.Length - 1)].transform.position, DroneSpawn[Random.Range(0, DroneSpawn.Length - 1)].transform.rotation);
-       
-            
-               
-
-               
-
+                Leave();
             }
 
             if (Hungar == null && (!photonView.Owner.IsMasterClient && PhotonNetwork.NickName != "FreeCam"))
             {
-         
-
-               
-
+                Leave();
             }
-
-           
-
-         
-
-
 
         }
 
-
-
-
-
     }
 
+    public void Leave()
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("Lobbi");
 
-
-
-
+        Cursor.lockState = CursorLockMode.None;
+    }
 }

@@ -9766,6 +9766,7 @@ MonoBehaviour:
   Parent: {fileID: 2732059451238514121}
   shoot1: {fileID: 2732059451238514124}
   photonView: {fileID: 2089917403744515148}
+  d: {fileID: 2732059452980570015}
 --- !u!82 &2732059451238514124
 AudioSource:
   m_ObjectHideFlags: 0
@@ -63829,6 +63830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressingThrottle: 1
+  canBoom: 1
   flySpeed: 50
   tangazhSpeed: 0.5
   BoomObj: {fileID: 2732059452132610835}

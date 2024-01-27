@@ -41,8 +41,7 @@ public class ConnectionToServer : MonoBehaviourPunCallbacks
             return;
         }
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 3
-            ;
+        roomOptions.MaxPlayers = 2;
         
         PhotonNetwork.CreateRoom(inputRoomName.text, roomOptions);
 
@@ -142,7 +141,7 @@ public class ConnectionToServer : MonoBehaviourPunCallbacks
 
     public void StartGameLevel(int levelIndex)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 0)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
 
             PhotonNetwork.LoadLevel(levelIndex);

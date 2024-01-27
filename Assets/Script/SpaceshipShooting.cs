@@ -15,7 +15,9 @@ public class SpaceshipShooting : MonoBehaviour
     [SerializeField] private GameObject Parent;
     [SerializeField] private AudioSource shoot1;
 
-    [SerializeField] private PhotonView photonView; // Вова, тронешь строки с фотоном - убью    :D
+    [SerializeField] private PhotonView photonView; 
+
+    [SerializeField] private GameObject d;
 
     
     Vector3 screenSpaceCenter = new Vector3(0.5f, 0.5f, 0);
@@ -36,7 +38,7 @@ public class SpaceshipShooting : MonoBehaviour
         Vector3 laserEnd = cam.ViewportToWorldPoint(screenSpaceCenter);
         if (Input.GetMouseButtonDown(0))
         {
-            if(!isReloading)
+            if(!isReloading && d.GetComponent<SpaceshipController>().canBoom)
             {
                 float x = Screen.width / 2;
                 float y = Screen.height / 2;

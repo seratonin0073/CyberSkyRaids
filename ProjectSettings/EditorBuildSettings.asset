@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobbi.unity
     guid: d9c1dffc6ee260f48a651d2bff5290b5
   - enabled: 1
-    path: Assets/Scenes/MapScene_ewf.unity
+    path: Assets/Scenes/MapScene_Match.unity
     guid: 1b9aa071fa48cba40a68713fb658eeb8
   m_configObjects: {}
