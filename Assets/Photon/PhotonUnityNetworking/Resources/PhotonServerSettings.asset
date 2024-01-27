@@ -19,7 +19,7 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: eu
     Server: 
     Port: 0
     ProxyServer: 
@@ -42,14 +42,10 @@ MonoBehaviour:
   - NotifyCollision
   - NotifyCollision1
   - NotifyCollision2
-<<<<<<< Updated upstream
-=======
   - BoomRPC
   - LeaveOnRound
   - SendAA
   - SendDrone
-  - sync
->>>>>>> Stashed changes
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1

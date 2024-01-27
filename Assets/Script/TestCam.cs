@@ -28,7 +28,7 @@ public class TestCam : MonoBehaviour
     /// <summary>
     /// Speed of camera movement when shift is held down,
     /// </summary>
-    public float fastMovementSpeed = 20f;
+    public float fastMovementSpeed = 51f;
 
     /// <summary>
     /// Sensitivity for free look.
@@ -48,7 +48,17 @@ public class TestCam : MonoBehaviour
     /// <summary>
     /// Set to true when free looking (on right mouse button).
     /// </summary>
-    private bool looking = false;
+    private bool looking = true;
+
+   
+    public float smoothTime = 0.2f;
+
+    private Vector2 currentRotation;
+    private Vector2 smoothVelocity;
+
+    [SerializeField] private float speedRotationX = 2.5f;
+    [SerializeField] private float speedRotationY = 2.5f;
+    [SerializeField] private float RotationInt = 50f;
 
 
     [SerializeField] private PhotonView photonView;
@@ -107,6 +117,7 @@ public class TestCam : MonoBehaviour
             float newRotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * freeLookSensitivity;
             float newRotationY = transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * freeLookSensitivity;
             transform.localEulerAngles = new Vector3(newRotationY, newRotationX, 0f);
+
         }
 
         float axis = Input.GetAxis("Mouse ScrollWheel");
@@ -116,14 +127,7 @@ public class TestCam : MonoBehaviour
             transform.position = transform.position + transform.forward * axis * zoomSensitivity;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            StartLooking();
-        }
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            StopLooking();
-        }
+        StartLooking();
     }
 
     void OnDisable()

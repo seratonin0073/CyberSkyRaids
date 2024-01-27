@@ -133,6 +133,9 @@ public class AAG_Script : MonoBehaviourPunCallbacks
 
     private void FindTarget()
     {
+        if (isDestroyed) return;
+
+
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Drone");
         GameObject CurrentTarget = null;
        

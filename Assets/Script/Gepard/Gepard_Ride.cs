@@ -11,8 +11,13 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
 	private float horizontal;
 	private float vertical;
+
+    public static GameObject Instance;
+
 	[SerializeField] private float speed = 6f;
-	[SerializeField] private float speedRotation = 1.5f;
+    [SerializeField] private float speed_a = 2f;
+    private float speed_a1 = 2f;
+    [SerializeField] private float speedRotation = 1.5f;
 	[SerializeField] private Rigidbody rb;
 	public bool canRide = true;
 	[SerializeField] private GameObject plane;
@@ -31,34 +36,49 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
     [SerializeField] private AudioListener al;
 
+    [SerializeField] private GameObject PanelUI;
+
+    [SerializeField] private GameObject MDL;
+
+    private bool isCol = true;
+    private void Awake()
+    {
+        Instance = this.gameObject;
+    }
+
     void Start()
 	{
+        
         if (!photonView1.IsMine)
         {
             Destroy(plane);
         }
         if (photonView1.IsMine)
         {
-            AudioListener.pause = true;
+            AudioListener.volume = 1;
         }
         engine1.Play();
         canRide = true;
 		rb = GetComponent<Rigidbody>();
 		plane.SetActive(false);
-		
+        PanelUI.SetActive(true);
 
+
+
+    }
+
+    public GameObject GetMDL()
+    {
+        return MDL;
     }
 
 	private void OnCollisionEnter(Collision collision)
 	{
 
-<<<<<<< Updated upstream
-=======
-      
+    
        
->>>>>>> Stashed changes
 
-        if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet") && collision.transform.name != "Bullet(Clone)")
+        if ((collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet") || collision.transform.name == "Acid") && collision.transform.name != "Bullet(Clone)")
 		{
 			if(canRide)
 			{
@@ -75,11 +95,13 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 
                 if (photonView1.IsMine)
                 {
-                    AudioListener.pause = false;
+                    AudioListener.volume = 0;
                 }
 
                 canRide = false;
-				StartCoroutine(WaitBeforeRestart());
+                
+
+                StartCoroutine(WaitBeforeRestart());
             }
 		}
 	}
@@ -99,6 +121,8 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
         }
         canRide = true;
         */
+
+
 
         if(photonView1.IsMine) PhotonNetwork.Destroy(this.gameObject);
 
@@ -128,6 +152,12 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
             }
             Debug.Log("Boom");
             canRide = false;
+
+            if (photonView1.IsMine)
+            {
+                AudioListener.volume = 0;
+            }
+
             StartCoroutine(WaitBeforeRestart());
         }
     }
@@ -169,29 +199,23 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
         }
 
 
-        if (Input.GetKey(KeyCode.Escape))
-		{
-			OpenM();
-		}
-    
-		if(PhotonNetwork.CurrentRoom.PlayerCount < 1)
-		{
+        if (Input.GetKey(KeyCode.Escape)) OpenM();
 
-<<<<<<< Updated upstream
-			Leave();
-
-		}
-=======
         if (PhotonNetwork.CurrentRoom.PlayerCount < 2) Leave();
 
-       
->>>>>>> Stashed changes
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            isCol = !isCol;
+        }
 
         if (canRide)
 		{
-			float forw = Input.GetAxis("Vertical");
-			transform.Translate(directionForward * Time.deltaTime * speed * forw);
-			float h = Input.GetAxis("Horizontal") * speedRotation;
+			float forw = Input.GetAxis("Vertical_Gepard");
+            if (Input.GetKey(KeyCode.LeftShift)) speed_a1 = speed_a;
+            else speed_a1 = 1f;
+
+            transform.Translate(directionForward * Time.deltaTime * speed * forw * speed_a1);
+			float h = Input.GetAxis("Horizontal_Gepard") * speedRotation;
 			Quaternion rotate = transform.rotation * Quaternion.Euler(0, h * speedRotation, 0);
 			transform.rotation = Quaternion.Lerp(transform.rotation, rotate, 15 * Time.deltaTime);
 			plane.SetActive(false);
@@ -199,6 +223,7 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 		else
 		{
 			plane.SetActive(true);
-		}
+            PanelUI.SetActive(false);
+        }
 	}
 }

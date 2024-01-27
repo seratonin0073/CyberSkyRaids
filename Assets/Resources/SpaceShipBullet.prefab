@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 658622215085920748}
   - component: {fileID: 3079973028376285413}
   - component: {fileID: 5748931938212561769}
-  - component: {fileID: 6572172789313560151}
+  - component: {fileID: 1147776958689410601}
   m_Layer: 0
   m_Name: SpaceShipBullet
   m_TagString: Bullet
@@ -184,7 +184,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 658622214711217851}
-  - {fileID: 604130461132164547}
+  - {fileID: 8409735896552522022}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &6572172789313560151
+--- !u!114 &1147776958689410601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d134cfd7d97bcb746a4523a4f767a78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7028449091965920601
+--- !u!1 &7695386215157031520
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,8 +311,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 604130461132164547}
-  - component: {fileID: 3239272269762067805}
+  - component: {fileID: 8409735896552522022}
+  - component: {fileID: 1702642457991284800}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -320,33 +320,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &604130461132164547
+--- !u!4 &8409735896552522022
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7028449091965920601}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.149, z: 0}
-  m_LocalScale: {x: 1.0000278, y: 1.0000278, z: 1.0000278}
+  m_GameObject: {fileID: 7695386215157031520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 658622215085920751}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &3239272269762067805
+--- !u!108 &1702642457991284800
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7028449091965920601}
+  m_GameObject: {fileID: 7695386215157031520}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.9622642, g: 0.6731986, b: 0.049928807, a: 1}
+  m_Color: {r: 1, g: 0.6850692, b: 0, a: 1}
   m_Intensity: 5
   m_Range: 15
   m_SpotAngle: 30

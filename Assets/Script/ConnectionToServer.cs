@@ -41,8 +41,7 @@ public class ConnectionToServer : MonoBehaviourPunCallbacks
             return;
         }
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 2
-            ;
+        roomOptions.MaxPlayers = 2;
         
         PhotonNetwork.CreateRoom(inputRoomName.text, roomOptions);
 

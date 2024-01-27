@@ -15,7 +15,7 @@ public class SpaceshipShooting : MonoBehaviour
     [SerializeField] private GameObject Parent;
     [SerializeField] private AudioSource shoot1;
 
-    [SerializeField] private PhotonView photonView;
+    [SerializeField] private PhotonView photonView; 
 
     [SerializeField] private GameObject d;
 
@@ -29,7 +29,7 @@ public class SpaceshipShooting : MonoBehaviour
     void Update()
     {
 
-        if (!photonView.IsMine || !d.GetComponent<SpaceshipController>().canBoom)
+        if (!photonView.IsMine)
         {
             return;
         }
@@ -38,7 +38,7 @@ public class SpaceshipShooting : MonoBehaviour
         Vector3 laserEnd = cam.ViewportToWorldPoint(screenSpaceCenter);
         if (Input.GetMouseButtonDown(0))
         {
-            if(!isReloading)
+            if(!isReloading && d.GetComponent<SpaceshipController>().canBoom)
             {
                 float x = Screen.width / 2;
                 float y = Screen.height / 2;
@@ -48,7 +48,6 @@ public class SpaceshipShooting : MonoBehaviour
                 bulletClone.transform.parent = null;
                 Rigidbody rb = bulletClone.AddComponent<Rigidbody>();
                 rb.useGravity = false;
-                rb.mass = 1;
                 rb.velocity = ray.direction * bulletForce;
                 rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
                 shoot1.Play();

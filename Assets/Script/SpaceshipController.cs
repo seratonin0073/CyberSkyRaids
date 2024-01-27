@@ -17,6 +17,9 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
     flySpeed = 50f,
     tangazhSpeed = 0.1f;
 
+    public static GameObject Instance;
+
+
     private float horizontalMovement;
     private float Amount = 120;
     [SerializeField] private GameObject BoomObj;
@@ -46,6 +49,8 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
     [SerializeField] private TextMeshPro NS; // NoSignal text
 
+    private bool isCol = true;
+
 
     Rigidbody boomRB;
 
@@ -53,7 +58,11 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
 	private float activeRoll, activePitch, activeYaw;
 
-	private void Start()
+    private void Awake()
+    {
+        Instance = this.gameObject;
+    }
+    private void Start()
 	{
 		if (!photonView.IsMine)
 		{
@@ -74,7 +83,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
-            AudioListener.pause = false;
+            AudioListener.volume = 1;
         }
 
 
@@ -105,12 +114,8 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter(Collision collision)
     {
-<<<<<<< Updated upstream
-		
-=======
-       
+        
 
->>>>>>> Stashed changes
 		if(collision.gameObject.name != "SpaceShipBullet(Clone)")
         {
 
@@ -151,7 +156,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
                 photonView.RPC(nameof(NotifyCollision1), RpcTarget.All, collision.transform.position);
                 Debug.Log("RPC");
 
-                if(photonView.IsMine) AudioListener.pause = true;
+                if(photonView.IsMine) AudioListener.volume = 0;
 
 
 
@@ -194,7 +199,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
             audio2.Play();
             fire_sound.Play();
             canBoom = false;
-          
+            if (photonView.IsMine) AudioListener.volume = 0;
 
 
         }
@@ -279,11 +284,10 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
         }
 
 
-<<<<<<< Updated upstream
-   
-=======
+        
 
->>>>>>> Stashed changes
+
+   
 
 
 
@@ -296,11 +300,12 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
             float vertical = Input.GetAxis("Vertical");
 
             horizontalMovement += horizontal * Amount * Time.fixedDeltaTime;
-            float verticalMovement = Mathf.Lerp(0, 50, Mathf.Abs(vertical)) * Mathf.Sign(vertical);
+            float verticalMovement = Mathf.Lerp(0, 90, Mathf.Abs(vertical)) * Mathf.Sign(vertical) * tangazhSpeed;
             float roll = Mathf.Lerp(0, 40, Mathf.Abs(horizontal)) * -Mathf.Sign(horizontal);
       
 
             transform.localRotation = Quaternion.Euler(Vector3.up * horizontalMovement + Vector3.right * verticalMovement + Vector3.forward * roll);
+
         }
 		else{
 			if (plane != null)
