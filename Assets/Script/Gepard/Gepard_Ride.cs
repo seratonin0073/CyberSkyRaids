@@ -52,6 +52,11 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 	private void OnCollisionEnter(Collision collision)
 	{
 
+<<<<<<< Updated upstream
+=======
+      
+       
+>>>>>>> Stashed changes
 
         if (collision.transform.CompareTag("Drone") || collision.transform.CompareTag("Bullet") && collision.transform.name != "Bullet(Clone)")
 		{
@@ -172,9 +177,15 @@ public class Gepard_Ride : MonoBehaviourPunCallbacks
 		if(PhotonNetwork.CurrentRoom.PlayerCount < 1)
 		{
 
+<<<<<<< Updated upstream
 			Leave();
 
 		}
+=======
+        if (PhotonNetwork.CurrentRoom.PlayerCount < 2) Leave();
+
+       
+>>>>>>> Stashed changes
 
         if (canRide)
 		{

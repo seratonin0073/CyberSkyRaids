@@ -10,7 +10,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 	public bool pressingThrottle = false;
 	public bool throttle => pressingThrottle;
 
-	private bool canBoom = true;
+	public bool canBoom = true;
 
     [SerializeField]
     private float
@@ -105,7 +105,12 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter(Collision collision)
     {
+<<<<<<< Updated upstream
 		
+=======
+       
+
+>>>>>>> Stashed changes
 		if(collision.gameObject.name != "SpaceShipBullet(Clone)")
         {
 
@@ -266,7 +271,7 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
 
         }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount < 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
         {
 
             Leave();
@@ -274,7 +279,11 @@ public class SpaceshipController : MonoBehaviourPunCallbacks
         }
 
 
+<<<<<<< Updated upstream
    
+=======
+
+>>>>>>> Stashed changes
 
 
 

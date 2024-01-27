@@ -73,7 +73,18 @@ MonoBehaviour:
   AASpawn: {fileID: 6633993942677854947}
   AA: {fileID: 0}
   Drone: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &4640855985400516758
+=======
+  Hungar: {fileID: 0}
+  FreeCamera: {fileID: 0}
+  ScoreA: {fileID: 9194992200512613528}
+  ScoreD: {fileID: 5324928053164413602}
+  UI: {fileID: 0}
+  prefWin: {fileID: 4962875230468266563, guid: 21791853c348ef04f9c8081d6b1e5143, type: 3}
+  prefLose: {fileID: 5225387770310823161, guid: 4b017d53b2e1d704890673b670da6771, type: 3}
+--- !u!1 &5410765425290751172
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

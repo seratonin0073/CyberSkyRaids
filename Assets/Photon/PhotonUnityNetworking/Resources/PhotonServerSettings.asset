@@ -42,6 +42,14 @@ MonoBehaviour:
   - NotifyCollision
   - NotifyCollision1
   - NotifyCollision2
+<<<<<<< Updated upstream
+=======
+  - BoomRPC
+  - LeaveOnRound
+  - SendAA
+  - SendDrone
+  - sync
+>>>>>>> Stashed changes
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

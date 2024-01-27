@@ -17,12 +17,33 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject Drone;
 
+<<<<<<< Updated upstream
+=======
+    [SerializeField] private GameObject Hungar;
+
+    [SerializeField] private GameObject FreeCamera;
+
+    [SerializeField] public static bool isEnd = false;
+
+    [SerializeField] public static bool isWin = false; // Anti-aircraft
+
+    [SerializeField] private TextMeshProUGUI ScoreA;
+
+    [SerializeField] private TextMeshProUGUI ScoreD;
+
+    [SerializeField] private GameObject UI;
+
+    [SerializeField] private GameObject prefWin;
+
+    [SerializeField] private GameObject prefLose;
+
+>>>>>>> Stashed changes
 
     bool clients = false;
 
     bool isStart = false;
 
-  
+    
 
     private void Awake()
     {
@@ -37,13 +58,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
                 
 
             }
-            else if (!photonView.Owner.IsMasterClient && PhotonNetwork.NickName != "FreeCam")
+            else if (!photonView.Owner.IsMasterClient)
             {
                 CreateControllerClient();
-                clients = true;
-            }else if (PhotonNetwork.NickName == "FreeCam")
-            {
-                CreateControllerFreeCamera();
+               
             }
 
             
@@ -91,6 +109,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
+<<<<<<< Updated upstream
 
 
 
@@ -113,4 +132,48 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     }
 
+=======
+        if (photonView.IsMine && !isEnd)
+        {
+
+
+
+
+
+
+            if (!photonView.Owner.IsMasterClient && AA == null && PhotonNetwork.NickName != "FreeCam")
+            {
+                AA = PhotonNetwork.Instantiate(Path.Combine("sci-Fi-Car"), AASpawn[Random.Range(0, AASpawn.Length - 1)].transform.position, Quaternion.identity);
+
+            }
+            if (photonView.Owner.IsMasterClient && Drone == null)
+            {
+
+                Leave();
+
+            }
+
+            if (Hungar == null && (!photonView.Owner.IsMasterClient && PhotonNetwork.NickName != "FreeCam"))
+            {
+
+                Leave();
+
+            }
+
+
+        }
+
+    }
+
+
+
+    public void Leave()
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("Lobbi");
+
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+>>>>>>> Stashed changes
 }

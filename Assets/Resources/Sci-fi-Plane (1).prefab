@@ -9759,13 +9759,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 658622215085920750, guid: ce8c17d00f5617f4eb1d3cdad8e300e9, type: 3}
   bulletSpawnPoint: {fileID: 2732059451502293460}
-  bulletForce: 300
+  bulletForce: 615
   YUp: 1
   cam: {fileID: 2732059452851043718}
   isReloading: 0
   Parent: {fileID: 2732059451238514121}
   shoot1: {fileID: 2732059451238514124}
   photonView: {fileID: 2089917403744515148}
+  d: {fileID: 2732059452980570015}
 --- !u!82 &2732059451238514124
 AudioSource:
   m_ObjectHideFlags: 0
@@ -63814,6 +63815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressingThrottle: 1
+  canBoom: 1
   flySpeed: 50
   tangazhSpeed: 0.1
   BoomObj: {fileID: 2732059452132610835}
