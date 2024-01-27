@@ -9759,7 +9759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 658622215085920750, guid: ce8c17d00f5617f4eb1d3cdad8e300e9, type: 3}
   bulletSpawnPoint: {fileID: 2732059451502293460}
-  bulletForce: 300
+  bulletForce: 615
   YUp: 1
   cam: {fileID: 2732059452851043718}
   isReloading: 0
